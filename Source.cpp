@@ -8,7 +8,7 @@ int main() {
 	while (1) {
 		cin >> input;
 		if (input == "Add-N") {
-			cin >> name>>A>>B>>C>>D;
+			cin >>name>>A>>B>>C>>D;
 
 		}
 	}

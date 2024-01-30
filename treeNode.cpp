@@ -1,5 +1,6 @@
 #include "treeNode.h"
 treeNode::treeNode(){
+	this->name = "";
 	this->mainBranch = "";
 	this->left = NULL;
 	this->right = NULL;

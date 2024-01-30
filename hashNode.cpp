@@ -1,10 +1,11 @@
 #include "hashNode.h"
 hashNode::hashNode() {
+	this->name = "";
 	this->next = NULL;
 	this->prev = NULL;
-
 }
-hashNode::hashNode(const coordinate&point, const vector<coordinate>&branches, hashNode*point_prev, hashNode*point_next) {
+hashNode::hashNode(string name,const coordinate&point, const vector<coordinate>&branches, hashNode*point_prev, hashNode*point_next) {
+	this->name = name;
 	this->point = point;
 	this->branches = branches;
 	this->prev = point_prev;

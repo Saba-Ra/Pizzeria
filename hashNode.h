@@ -11,6 +11,6 @@ private:
 	hashNode* next;
 public:
 	hashNode();
-	hashNode(const coordinate&, const vector<coordinate>&, hashNode*, hashNode*);
+	hashNode(string name,const coordinate&, const vector<coordinate>&, hashNode*, hashNode*);
 };
 
