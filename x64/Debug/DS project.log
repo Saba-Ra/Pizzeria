@@ -1,3 +1,4 @@
+
 ﻿  KDtree.cpp
   Source.cpp
   coordinate.cpp
@@ -5,3 +6,19 @@
   treeNode.cpp
   Generating Code...
 D:\DS final project\Pizzeria\coordinate.cpp(20): error C4716: 'coordinate::operator=': must return a value
+
+
+﻿  coordinate.cpp
+  hashNode.cpp
+  KDtree.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(36,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(37,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Source.cpp
+  treeNode.cpp
+  Generating Code...
+  DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe
+
+﻿  Source.cpp
+  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+
+
