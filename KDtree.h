@@ -10,7 +10,7 @@ private:
 	vector<treeNode> all_nodes;
 public:
 	KDtree();
-	void insert(string, const coordinate&);
+	void insert(string,string, const coordinate&);
 	void Delete(coordinate);
 	void pizzeria_in_region();
 	double distance(coordinate,coordinate);

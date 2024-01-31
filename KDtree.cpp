@@ -3,13 +3,12 @@
 KDtree::KDtree() {
 	root = NULL;
 }
-void KDtree::insert(string name, const coordinate& point) {
-	treeNode newNode(name, point, "", NULL, NULL);
+
+void KDtree::insert(string mainBranch,string name, const coordinate& point) {
+	treeNode newNode(name, point, mainBranch, NULL, NULL);
 	all_nodes.push_back(newNode);
 	buildTree();
 }
-
-
 
 void KDtree::buildTree() {
 	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
@@ -37,7 +36,6 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 	return newNode;
 }
 
-
 void KDtree::Delete(coordinate point) {
 	//auto it = std::find(all_nodes.begin(), all_nodes.end(), point);
 
@@ -56,6 +54,7 @@ double KDtree::distance(coordinate node, coordinate target) {
 	double diff_y = node.set_get_xy()[1] - target.set_get_xy()[1];
 	return sqrt(diff_x * diff_x + diff_y * diff_y);
 }
+
 treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth) {
 	if (root == NULL) return NULL;
 
@@ -82,7 +81,6 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 
 	return best;
 }
-
 
 treeNode* KDtree::nearest_pizzeria(coordinate& target) {
 	return find_nearest(root, target, 0);
