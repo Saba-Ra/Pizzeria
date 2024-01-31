@@ -9,7 +9,7 @@ private:
 public:
 	coordinate();
 	coordinate(float*);
-	float* get_xy();
+	float* set_get_xy();
 	friend istream& operator>>(istream&, coordinate&);
-	coordinate& operator=(const coordinate&);
+	coordinate* operator=(const coordinate&);
 };

@@ -12,3 +12,4 @@ treeNode::treeNode(string name,const coordinate& node_point, string node_mainBra
 	this->left = left_child;
 	this->right = right_child;
 }
+coordinate treeNode::get_point() { return point; }

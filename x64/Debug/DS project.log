@@ -1,5 +1,9 @@
-﻿  Source.cpp
+﻿  coordinate.cpp
   hashNode.cpp
+  KDtree.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(36,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(37,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Source.cpp
   treeNode.cpp
   Generating Code...
-  DS project.vcxproj -> D:\DS Project\Pizzeria\x64\Debug\DS project.exe
+  DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe
