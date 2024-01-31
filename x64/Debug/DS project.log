@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 ﻿  KDtree.cpp
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(61,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
@@ -30,3 +31,7 @@ C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(37,80): warning C42
 
 
 
+=======
+﻿  Source.cpp
+  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+>>>>>>> Stashed changes

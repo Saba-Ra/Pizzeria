@@ -6,6 +6,7 @@ void KDtree::insert() {
 
 }
 
+<<<<<<< Updated upstream
 //treeNode* KDtree::buildTree(const vector<treeNode>& nodes, int depth) {
 //	if (nodes.empty()) {
 //		return nullptr;
@@ -28,23 +29,36 @@ void KDtree::insert() {
 //	return node;
 //}
 
+=======
+>>>>>>> Stashed changes
 void KDtree::Delete() {
 
 }
+
 void KDtree::pizzeria_in_region() {
 
 }
-void KDtree::nearest_pizzeria() {
-	int x=0;
-	int y = 2;
-	int z = 56;
+
+coordinate KDtree::find_nearest( coordinate& target,int depth) {
+	if (root == NULL) return NULL;
+
+	if (target.set_get_xy()[depth%2]<root->get_point().set_get_xy()[depth % 2]) {
+
+	}
 }
+
+coordinate KDtree::nearest_pizzeria( coordinate&target) {
+	return find_nearest(target, 0);
+}
+
 void KDtree::nearest_branch() {
 
 }
+
 void KDtree::pizzeria_in_circle() {
 
 }
+
 void KDtree::pizzeria_sort(int begin, int end, int axis) {
 	if (begin < end) {
 		int middle = (end - begin) / 2;

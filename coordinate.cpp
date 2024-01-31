@@ -7,9 +7,9 @@ coordinate::coordinate(float* point) {
 float* coordinate::set_get_xy() { return x_y; }
 
 istream& operator>>(istream& in, coordinate& point) {
-	cout << "X:";
+	cout << "\t\t\t\t\t\tX:";
 	in >> point.x_y[0];
-	cout << "Y:";
+	cout << "\t\t\t\t\t\tY:";
 	in >> point.x_y[1];
 	return in;
 };
