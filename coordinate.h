@@ -12,5 +12,5 @@ public:
 	float* set_get_xy();
 	friend istream& operator>>(istream&, coordinate&);
 	coordinate* operator=(const coordinate&);
-	bool operator==(const coordinate&);
+	bool operator==(const coordinate&) const;
 };

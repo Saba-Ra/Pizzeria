@@ -20,6 +20,6 @@ coordinate* coordinate::operator=(const coordinate& secondPoint) {
 	return this;
 }
 
-bool coordinate::operator==(const coordinate& secondPoint) {
+bool coordinate::operator==(const coordinate& secondPoint) const {
 	return this->x_y[0] == secondPoint.x_y[0] && this->x_y[1] == secondPoint.x_y[1];
 }

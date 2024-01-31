@@ -1,15 +1,24 @@
 #include "KDtree.h"
 #include"math.h"
+
 KDtree::KDtree() {
 	root = NULL;
 }
+
 void KDtree::insert(string name, const coordinate& point) {
 	treeNode newNode(name, point, "", NULL, NULL);
-	all_nodes.push_back(newNode);
-	buildTree();
+	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode node) {
+		return node.get_point() == point;
+		});
+
+	if (it != all_nodes.end()) {
+		cout << "There is a pizeeria here!";
+	}
+	else {
+		all_nodes.push_back(newNode);
+		buildTree();
+	}
 }
-
-
 
 void KDtree::buildTree() {
 	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
@@ -37,14 +46,18 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 	return newNode;
 }
 
-
 void KDtree::Delete(coordinate point) {
-	//auto it = std::find(all_nodes.begin(), all_nodes.end(), point);
+	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&]( treeNode node) {
+		return node.get_point() == point;
+		});
 
-	//if (it != all_nodes.end()) {
-	//	all_nodes.erase(it);
+	if (it != all_nodes.end()) {
+		all_nodes.erase(it);
+		buildTree();
+	}
+	//else {
+	//	cout << " ";
 	//}
-	//buildTree();
 }
 
 void KDtree::pizzeria_in_region() {
@@ -56,6 +69,7 @@ double KDtree::distance(coordinate node, coordinate target) {
 	double diff_y = node.set_get_xy()[1] - target.set_get_xy()[1];
 	return sqrt(diff_x * diff_x + diff_y * diff_y);
 }
+
 treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth) {
 	if (root == NULL) return NULL;
 
@@ -82,7 +96,6 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 
 	return best;
 }
-
 
 treeNode* KDtree::nearest_pizzeria(coordinate& target) {
 	return find_nearest(root, target, 0);
