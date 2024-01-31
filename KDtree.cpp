@@ -9,34 +9,8 @@ void KDtree::insert(string name, const coordinate& point) {
 	buildTree();
 }
 
-<<<<<<< Updated upstream
-
-//treeNode* KDtree::buildTree(const vector<treeNode>& nodes, int depth) {
-//	if (nodes.empty()) {
-//		return nullptr;
-//	}
-//
-//	int axis = depth % 2;
-//
-//	// Sort points based on the current axis that is x or y
-//	this->KDtree::pizzeria_sort(0, nodes.size()-1, axis);
-//
-//	// Find the median point
-//	int medianIndex = nodes.size() / 2;
-//	Point medianPoint = sortedPoints[medianIndex];
-//
-//	// Create a node and recursively build left and right subtrees
-//	treeNode* newNode = new treeNode(medianPoint);
-//	newNode-> = buildTreeRecursive(std::vector<Point>(sortedPoints.begin(), sortedPoints.begin() + medianIndex), depth + 1);
-//	node->right = buildTreeRecursive(std::vector<Point>(sortedPoints.begin() + medianIndex + 1, sortedPoints.end()), depth + 1);
-//
-//	return node;
-//}
 
 
-
-void KDtree::Delete() {
-=======
 void KDtree::buildTree() {
 	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
 }
@@ -45,7 +19,6 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 	if (begin > end) {
 		return nullptr;
 	}
->>>>>>> Stashed changes
 
 	int axis = depth % 2;
 
@@ -77,7 +50,7 @@ void KDtree::Delete(coordinate point) {
 void KDtree::pizzeria_in_region() {
 
 }
-<<<<<<< Updated upstream
+
 double KDtree::distance(coordinate node, coordinate target) {
 	double diff_x = node.set_get_xy()[0] - target.set_get_xy()[0];
 	double diff_y = node.set_get_xy()[1] - target.set_get_xy()[1];
@@ -89,13 +62,13 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 	treeNode* nextBranch = target.set_get_xy()[depth % 2] < root->get_point().set_get_xy()[depth % 2] ? root->set_get_left() : root->set_get_right();
 	treeNode* otherBranch = target.set_get_xy()[depth % 2] < root->get_point().set_get_xy()[depth % 2] ? root->set_get_right() : root->set_get_left();
 	treeNode* best = find_nearest(nextBranch, target, depth + 1);
-	
+
 	//check the current and best distance
 	double distance_curr = distance(current->get_point(), target);
 	double distance_best = best != NULL ? distance(best->get_point(), target) : numeric_limits<double>::max();
 	//update best if necessary
 	if (distance_curr < distance_best)best = current;
-	
+
 	// Check the otherBranch if necessary
 	if (abs(target.set_get_xy()[depth % 2] - current->get_point().set_get_xy()[depth % 2]) < distance_best) {
 		treeNode* best_otherBranch = find_nearest(otherBranch, target, depth + 1);
@@ -105,26 +78,14 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 				best = best_otherBranch;
 			}
 		}
-=======
-
-coordinate KDtree::find_nearest(coordinate& target, int depth) {
-	if (root == NULL) return NULL;
-
-	if (target.set_get_xy()[depth % 2] < root->get_point().set_get_xy()[depth % 2]) {
-
->>>>>>> Stashed changes
 	}
 
 	return best;
 }
 
-<<<<<<< Updated upstream
+
 treeNode* KDtree::nearest_pizzeria(coordinate& target) {
 	return find_nearest(root, target, 0);
-=======
-coordinate KDtree::nearest_pizzeria(coordinate& target) {
-	return find_nearest(target, 0);
->>>>>>> Stashed changes
 }
 
 void KDtree::nearest_branch() {
@@ -150,10 +111,7 @@ void KDtree::pizzeria_merge(int begin, int middle, int end, int axis) {
 
 	treeNode* left = new treeNode[size1 + 1];
 	treeNode* right = new treeNode[size2 + 1];
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 	left[size1].get_point().set_get_xy()[axis] = numeric_limits<double>::infinity();
 	right[size2].get_point().set_get_xy()[axis] = numeric_limits<double>::infinity();
 

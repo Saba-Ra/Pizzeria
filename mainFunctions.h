@@ -44,21 +44,21 @@ void print_menu() {
 			cin >> name;
 			cout << "\t\t\t\t\t\x1b[38;5;208mNow enter 4 coordinates :\x1b[38;5;220m\n";
 			cin >> A >> B >> C >> D;
-			tree.insert();
-			tree.insert();
-			tree.insert();
-			tree.insert();
+			//tree.insert();
+			//tree.insert();
+			//tree.insert();
+			//tree.insert();
 			cout << "\t\t\t\t\t\x1b[38;5;208mRegion added successfully :\x1b[38;5;220m\n";
 			Sleep(1000);
 			system("cls");
 		}
 		else if (input == "Add-Br") {
 			cin >> name >> A;
-			tree.insert();
+			//tree.insert();
 		}
 		else if (input == "Del-Br") {
 			cin >> name >> A;
-			tree.Delete();
+			//tree.Delete();
 		}
 		else if (input == "List-P") {
 			cin >> name;
