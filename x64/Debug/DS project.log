@@ -1,2 +1,7 @@
-﻿  Source.cpp
-  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+﻿  KDtree.cpp
+  Source.cpp
+  coordinate.cpp
+  hashNode.cpp
+  treeNode.cpp
+  Generating Code...
+D:\DS final project\Pizzeria\coordinate.cpp(20): error C4716: 'coordinate::operator=': must return a value

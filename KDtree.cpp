@@ -12,7 +12,7 @@ void KDtree::pizzeria_in_region() {
 
 }
 void KDtree::nearest_pizzeria() {
-
+	int x;
 }
 void KDtree::nearest_branch() {
 
