@@ -13,8 +13,9 @@ public:
 	void insert();
 	void Delete();
 	void pizzeria_in_region();
-	coordinate nearest_pizzeria(coordinate&);
-	coordinate find_nearest( coordinate&,int);
+	double distance(coordinate,coordinate);
+	treeNode* nearest_pizzeria(coordinate&);
+	treeNode* find_nearest( treeNode*,coordinate&,int);
 	void nearest_branch();
 	void pizzeria_in_circle();
 	void pizzeria_sort(int, int, int);

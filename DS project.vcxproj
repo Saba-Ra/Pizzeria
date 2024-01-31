@@ -137,6 +137,7 @@
     <ClInclude Include="coordinate.h" />
     <ClInclude Include="hashNode.h" />
     <ClInclude Include="KDtree.h" />
+    <ClInclude Include="mainFunctions.h" />
     <ClInclude Include="treeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
