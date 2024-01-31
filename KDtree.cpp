@@ -5,6 +5,29 @@ KDtree::KDtree() {
 void KDtree::insert() {
 
 }
+
+//treeNode* KDtree::buildTree(const vector<treeNode>& nodes, int depth) {
+//	if (nodes.empty()) {
+//		return nullptr;
+//	}
+//
+//	int axis = depth % 2;
+//
+//	// Sort points based on the current axis that is x or y
+//	this->KDtree::pizzeria_sort(0, nodes.size()-1, axis);
+//
+//	// Find the median point
+//	int medianIndex = nodes.size() / 2;
+//	Point medianPoint = sortedPoints[medianIndex];
+//
+//	// Create a node and recursively build left and right subtrees
+//	treeNode* newNode = new treeNode(medianPoint);
+//	newNode-> = buildTreeRecursive(std::vector<Point>(sortedPoints.begin(), sortedPoints.begin() + medianIndex), depth + 1);
+//	node->right = buildTreeRecursive(std::vector<Point>(sortedPoints.begin() + medianIndex + 1, sortedPoints.end()), depth + 1);
+//
+//	return node;
+//}
+
 void KDtree::Delete() {
 
 }
@@ -28,6 +51,7 @@ void KDtree::pizzeria_sort(int begin, int end, int axis) {
 		pizzeria_merge(begin, middle, end, axis);
 	}
 }
+
 void KDtree::pizzeria_merge(int begin, int middle, int end, int axis) {
 	int size1 = middle - begin + 1;
 	int size2 = end - middle;

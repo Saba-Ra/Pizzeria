@@ -13,3 +13,7 @@ treeNode::treeNode(string name,const coordinate& node_point, string node_mainBra
 	this->right = right_child;
 }
 coordinate treeNode::get_point() { return point; }
+
+treeNode* treeNode::set_get_left() { return left; }
+
+treeNode* treeNode::set_get_right() { return right; }
