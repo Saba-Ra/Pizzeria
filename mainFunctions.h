@@ -13,6 +13,7 @@ void print_logo() {
 		"\t\t\t\t╚═╝     ╚═╝╚═════╝╚═════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝ ╚═╝\033[0m\n\n\n";
 
 }
+
 void print_help() {
 	//help menu
 	cout << "\x1b[38;5;208m";
@@ -29,9 +30,12 @@ void print_help() {
 		"\t\t\t\t\tMost-Brs\n\n";
 	//Undo
 }
+
 void print_menu() {	
+	//names can have space
+	//don't forget to fix cin
 	KDtree tree;
-	string input, name;
+	string input, name,mainName;
 	coordinate A, B, C, D;
 	int R;
 	while (1) {
@@ -44,21 +48,22 @@ void print_menu() {
 			cin >> name;
 			cout << "\t\t\t\t\t\x1b[38;5;208mNow enter 4 coordinates :\x1b[38;5;220m\n";
 			cin >> A >> B >> C >> D;
-			//tree.insert();
-			//tree.insert();
-			//tree.insert();
-			//tree.insert();
+			//region insert
 			cout << "\t\t\t\t\t\x1b[38;5;208mRegion added successfully :\x1b[38;5;220m\n";
 			Sleep(1000);
 			system("cls");
 		}
-		else if (input == "Add-Br") {
+		else if (input=="Add-P") {
 			cin >> name >> A;
-			//tree.insert();
+			tree.insert("", name, A);
+		}
+		else if (input == "Add-Br") {
+			cin >> mainName>>name >> A;
+			tree.insert(mainName,name,A);
 		}
 		else if (input == "Del-Br") {
 			cin >> name >> A;
-			//tree.Delete();
+			tree.Delete(A);
 		}
 		else if (input == "List-P") {
 			cin >> name;

@@ -1,5 +1,9 @@
+
 ﻿  KDtree.cpp
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(24,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(128,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(129,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe
+
+﻿  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+
