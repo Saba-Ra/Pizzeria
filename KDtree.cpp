@@ -6,12 +6,11 @@ KDtree::KDtree() {
 }
 
 
-void KDtree::insert(string name, const coordinate& point) {
-	treeNode newNode(name, point, "", NULL, NULL);
+void KDtree::insert(string mainBranch, string name, const coordinate& point) {
+	treeNode newNode(name, point, mainBranch, NULL, NULL);
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode node) {
 		return node.get_point() == point;
 		});
-
 	if (it != all_nodes.end()) {
 		cout << "There is a pizeeria here!";
 	}
@@ -19,13 +18,8 @@ void KDtree::insert(string name, const coordinate& point) {
 		all_nodes.push_back(newNode);
 		buildTree();
 	}
-
-void KDtree::insert(string mainBranch,string name, const coordinate& point) {
-	treeNode newNode(name, point, mainBranch, NULL, NULL);
-	all_nodes.push_back(newNode);
-	buildTree();
-
 }
+
 
 void KDtree::buildTree() {
 	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
