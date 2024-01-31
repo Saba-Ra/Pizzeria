@@ -3,10 +3,13 @@
 KDtree::KDtree() {
 	root = NULL;
 }
-void KDtree::insert() {
-
+void KDtree::insert(string name, const coordinate& point) {
+	treeNode newNode(name, point, "", NULL, NULL);
+	all_nodes.push_back(newNode);
+	buildTree();
 }
 
+<<<<<<< Updated upstream
 
 //treeNode* KDtree::buildTree(const vector<treeNode>& nodes, int depth) {
 //	if (nodes.empty()) {
@@ -33,12 +36,48 @@ void KDtree::insert() {
 
 
 void KDtree::Delete() {
+=======
+void KDtree::buildTree() {
+	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
+}
 
+treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
+	if (begin > end) {
+		return nullptr;
+	}
+>>>>>>> Stashed changes
+
+	int axis = depth % 2;
+
+	// Sort points based on the current axis that is x or y
+	this->KDtree::pizzeria_sort(begin, end, axis);
+
+	// Find the median point
+	int medianIndex = (end - begin + 1) / 2;
+
+	// Create a node and recursively build left and right subtrees
+	treeNode* newNode;
+	newNode = &all_nodes[medianIndex];
+	newNode->set_get_left() = buildTreeRecursive(begin, medianIndex, depth + 1);
+	newNode->set_get_right() = buildTreeRecursive(medianIndex + 1, end, depth + 1);
+
+	return newNode;
+}
+
+
+void KDtree::Delete(coordinate point) {
+	//auto it = std::find(all_nodes.begin(), all_nodes.end(), point);
+
+	//if (it != all_nodes.end()) {
+	//	all_nodes.erase(it);
+	//}
+	//buildTree();
 }
 
 void KDtree::pizzeria_in_region() {
 
 }
+<<<<<<< Updated upstream
 double KDtree::distance(coordinate node, coordinate target) {
 	double diff_x = node.set_get_xy()[0] - target.set_get_xy()[0];
 	double diff_y = node.set_get_xy()[1] - target.set_get_xy()[1];
@@ -66,13 +105,26 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 				best = best_otherBranch;
 			}
 		}
+=======
+
+coordinate KDtree::find_nearest(coordinate& target, int depth) {
+	if (root == NULL) return NULL;
+
+	if (target.set_get_xy()[depth % 2] < root->get_point().set_get_xy()[depth % 2]) {
+
+>>>>>>> Stashed changes
 	}
 
 	return best;
 }
 
+<<<<<<< Updated upstream
 treeNode* KDtree::nearest_pizzeria(coordinate& target) {
 	return find_nearest(root, target, 0);
+=======
+coordinate KDtree::nearest_pizzeria(coordinate& target) {
+	return find_nearest(target, 0);
+>>>>>>> Stashed changes
 }
 
 void KDtree::nearest_branch() {
@@ -98,6 +150,10 @@ void KDtree::pizzeria_merge(int begin, int middle, int end, int axis) {
 
 	treeNode* left = new treeNode[size1 + 1];
 	treeNode* right = new treeNode[size2 + 1];
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	left[size1].get_point().set_get_xy()[axis] = numeric_limits<double>::infinity();
 	right[size2].get_point().set_get_xy()[axis] = numeric_limits<double>::infinity();
 
