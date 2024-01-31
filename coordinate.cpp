@@ -1,17 +1,20 @@
 #include "coordinate.h"
-coordinate::coordinate() :x(0), y(0) {}
-coordinate::coordinate(float point_x, float point_y) {
-	x = point_x;
-	y = point_y;
-	
+coordinate::coordinate() :x_y{ 0 } {}
+coordinate::coordinate(float* point) {
+	x_y[0] = point[0];
+	x_y[1] = point[0];
 }
-float coordinate::get_x() { return x; }
-float coordinate::get_y() { return y; }
+float* coordinate::get_xy() { return x_y; }
 
 istream& operator>>(istream& in, coordinate& point) {
 	cout << "X:";
-	in >> point.x;
+	in >> point.x_y[0];
 	cout << "Y:";
-	in >> point.y;
+	in >> point.x_y[1];
 	return in;
 };
+
+coordinate& coordinate::operator=(const coordinate& secondPoint) {
+	x_y[0] = secondPoint.x_y[0];
+	x_y[1] = secondPoint.x_y[1];
+}

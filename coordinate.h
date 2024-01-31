@@ -5,12 +5,11 @@ using namespace std;
 class coordinate
 {
 private:
-	float x;
-	float y;
+	float x_y[2];
 public:
 	coordinate();
-	coordinate(float, float);
-	float get_x();
-	float get_y();
-	friend istream& operator>>(istream&,coordinate&);
+	coordinate(float*);
+	float* get_xy();
+	friend istream& operator>>(istream&, coordinate&);
+	coordinate& operator=(const coordinate&);
 };
