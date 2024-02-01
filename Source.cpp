@@ -2,5 +2,5 @@
 
 int main() {
 	SetConsoleOutputCP(65001);
-	print_menu();	
+	logo_loading();	
 }

@@ -30,6 +30,9 @@
     <ClCompile Include="KDtree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hashTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coordinate.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mainFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hashTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
