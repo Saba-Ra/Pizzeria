@@ -1,7 +1,8 @@
 #pragma once
 #include"KDtree.h"
-#include"hashNode.h"
+#include"hashTable.h"
 #include"windows.h"
+#include"stdexcept"
 void print_menu();
 void print_help();
 void gotoxy(int x, int y) {
@@ -36,6 +37,7 @@ void logo_loading() {
 	print_help();
 	print_menu();
 }
+
 void print_logo() {
 
 	cout << "\n\n\n\n";
@@ -66,10 +68,21 @@ void print_help() {
 	//Undo
 }
 
+
+void printAll(vector<coordinate> vec) {
+	int j = 1;
+	for (auto i : vec) {
+		cout << "X" << j << " : " << i.set_get_xy()[0];
+		cout << "Y" << j << " : " << i.set_get_xy()[1];
+		j++;
+	}
+}
+
 void print_menu() {	
 	//names can have space
 	//don't forget to fix cin
 	KDtree tree;
+	hashTable table;
 	string input, name,mainName;
 	coordinate A, B, C, D;
 	bool flag = false;
@@ -88,7 +101,7 @@ void print_menu() {
 			cout << "\t\t\t\t\t\x1b[38;5;208mNow enter 4 coordinates :\x1b[38;5;220m\n";
 			cin >> A >> B >> C >> D;
 			//region insert
-			cout << "\t\t\t\t\t\x1b[38;5;208mRegion added successfully :\x1b[38;5;220m\n";
+			cout << "\t\t\t\t\t\x1b[38;5;208mRegion added successfully \x1b[38;5;220m\n";
 			Sleep(1000);
 			system("cls");
 		}
@@ -110,6 +123,12 @@ void print_menu() {
 		}
 		else if (input == "List-Brs") {
 			cin >> name;
+			try {
+				printAll(table.search(name));
+			}
+			catch (exception error) {
+				cerr << error.what();
+			}
 		}
 		else if (input == "Near-P") {
 			cin >> A;

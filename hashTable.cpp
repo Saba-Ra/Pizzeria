@@ -1,19 +1,26 @@
 #include "hashTable.h"
 
-hashTable::hashTable(int size) : size(size), table(size) {}
+hashTable::hashTable() : size(47), table(47) {}
 
-//void hashTable::insert(treeNode& Node) {
-//    Node.get_point();
-//    int index = hash(Node);
-//    table[index].push_back(student);
-//}
-//
-//int hashTable::search(const string& name) {
-//    int index = hash(name);
-//    for (const auto& student : table[index]) {
-//        if (student.name == name) {
-//            return student.roll_number;
-//        }
-//    }
-//    return -1; // Name not found
-//}
+void hashTable::insert(hashNode& Node) {
+	int index = hash(Node.get_name());
+	table[index].push_back(Node);
+}
+
+int hashTable::hash(const string& name) {
+	int value = 0;
+	for (auto i : name) {
+		value += (int)i;
+	}
+	return value % size;
+}
+vector<coordinate> hashTable::search(const string& name) {
+	int index = hash(name);
+	for (auto& mainBranch : table[index]) {
+		if (mainBranch.get_name() == name) {
+			return mainBranch.get_branches();
+		}
+	}
+	throw runtime_error("No branches found for the given name.");
+}
+

@@ -12,5 +12,7 @@ private:
 public:
 	hashNode();
 	hashNode(string name,const coordinate&, const vector<coordinate>&, hashNode*, hashNode*);
+	string get_name();
+	vector<coordinate> get_branches();
 };
 

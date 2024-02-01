@@ -11,4 +11,5 @@ hashNode::hashNode(string name,const coordinate&point, const vector<coordinate>&
 	this->prev = point_prev;
 	this->next = point_next;
 }
-
+string hashNode::get_name() { return this->name; }
+vector<coordinate> hashNode::get_branches() { return this->branches; }

@@ -1,22 +1,20 @@
 #pragma once
 #include<iostream>
 #include<string>
-#include"treeNode.h"
+#include"hashNode.h"
 #include"vector"
 class hashTable
 {
 private:
 	int size;
-	vector<vector<treeNode>> table;
+	vector<vector<hashNode>> table;
 public:
-    hashTable(int);
+	hashTable();
 
-    void insert(treeNode&);
-    
-    int hash(const string&);
+	void insert(hashNode&);
 
-    int search(const string& name);
+	int hash(const string&);
 
+	vector<coordinate> search(const string& name);
 
 };
-
