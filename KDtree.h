@@ -7,7 +7,7 @@ class KDtree
 {
 private:
 	treeNode* root;
-	vector<treeNode> all_nodes;
+	vector<treeNode*> all_nodes;
 public:
 	KDtree();
 	void insert(string,string, const coordinate&);
@@ -23,5 +23,6 @@ public:
 	void pizzeria_merge(int, int, int, int);
 	treeNode* buildTreeRecursive(int, int, int);
 	void buildTree();
+	~KDtree();
 };
 

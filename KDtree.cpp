@@ -7,9 +7,9 @@ KDtree::KDtree() {
 
 
 void KDtree::insert(string mainBranch, string name, const coordinate& point) {
-	treeNode newNode(name, point, mainBranch, NULL, NULL);
-	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode node) {
-		return node.get_point() == point;
+	treeNode* newNode = new treeNode(name, point, mainBranch, NULL, NULL);
+	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
+		return node->get_point() == point;
 		});
 	if (it != all_nodes.end()) {
 		cout << "There is a pizeeria here!";
@@ -40,16 +40,16 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 
 	// Create a node and recursively build left and right subtrees
 	treeNode* newNode;
-	newNode = &all_nodes[medianIndex];
-	newNode->set_get_left() = buildTreeRecursive(begin, medianIndex, depth + 1);
-	newNode->set_get_right() = buildTreeRecursive(medianIndex + 1, end, depth + 1);
+	newNode = all_nodes[begin+medianIndex];
+	newNode->set_get_left() = buildTreeRecursive(begin, begin+medianIndex-1, depth + 1);
+	newNode->set_get_right() = buildTreeRecursive(begin+medianIndex + 1, end, depth + 1);
 
 	return newNode;
 }
 
 void KDtree::Delete(coordinate point) {
-	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&]( treeNode node) {
-		return node.get_point() == point;
+	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&]( treeNode* node) {
+		return node->get_point() == point;
 		});
 
 	if (it != all_nodes.end()) {
@@ -113,9 +113,9 @@ void KDtree::pizzeria_in_circle() {
 void KDtree::pizzeria_sort(int begin, int end, int axis) {
 	if (begin < end) {
 		int middle = (end - begin) / 2;
-		pizzeria_sort(begin, middle, axis);
-		pizzeria_sort(middle + 1, end, axis);
-		pizzeria_merge(begin, middle, end, axis);
+		pizzeria_sort(begin, begin+middle, axis);
+		pizzeria_sort(begin+middle + 1, end, axis);
+		pizzeria_merge(begin, begin+middle, end, axis);
 	}
 }
 
@@ -130,18 +130,24 @@ void KDtree::pizzeria_merge(int begin, int middle, int end, int axis) {
 	right[size2].get_point().set_get_xy()[axis] = numeric_limits<double>::infinity();
 
 	for (int i = 0; i < size1; i++)
-		left[i] = all_nodes[begin + i];
+		left[i] = *all_nodes[begin + i];
 	for (int i = 0; i < size2; i++)
-		right[i] = all_nodes[middle + 1 + i];
+		right[i] = *all_nodes[middle + 1 + i];
 
 	for (int i = 0, j = 0, k = begin; k <= end; k++) {
 		if (left[i].get_point().set_get_xy()[axis] < right[j].get_point().set_get_xy()[axis]) {
-			all_nodes[k] = left[i];
+			all_nodes[k] = &left[i];
 			i++;
 		}
 		else {
-			all_nodes[k] = right[j];
+			all_nodes[k] = &right[j];
 			j++;
 		}
+	}
+}
+
+KDtree::~KDtree() {
+	for (treeNode* node : all_nodes) {
+		delete node;
 	}
 }
