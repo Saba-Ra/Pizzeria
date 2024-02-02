@@ -12,9 +12,19 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 		return node->get_point() == point;
 		});
 	if (it != all_nodes.end()) {
-		cout << "There is another pizzeria at this location!\n";
+		cout << "\n\t\t\t\t\tThere is another pizzeria at this location!\n";
 	}
 	else {
+		if (mainBranch != name) {
+			try {
+				table.search(mainBranch);
+			}
+			catch (exception error) {
+				cout << "\n\t\t\t\t\tNo main branche matches the given name!" << endl;
+				return;
+			}
+		}
+
 		all_nodes.push_back(newNode);
 		buildTree();
 
@@ -23,13 +33,7 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 			table.insert(newHashNode);
 		}
 		coordinate newBranch(point.set_get_xy());
-		try {
-			table.search(mainBranch)->push_back(newBranch);
-		}
-		catch (char* error) {
-			cout << "\t\t\t\t\tNo main branche matches the given name!" << endl;
-			return;
-		}
+		table.search(mainBranch)->push_back(newBranch);
 		cout << "\n\t\t\t\t\tYour pizzeria has been successfully added!\n";
 	}
 }
@@ -40,7 +44,7 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 		});
 	if (it != all_nodes.end()) {
 		if ((*it)->get_mainBranch() == "") {
-			throw("You can not delete a main branch!");
+			throw("\t\t\t\t\tYou can not delete a main branch!");
 		}
 		else {
 			string branchName = (*it)->get_mainBranch();
@@ -51,7 +55,7 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 			all_nodes.erase(it);
 			buildTree();
 
-			cout << "\t\t\t\t\t\"" << (*it)->get_name() << "\" in location " << (*it)->get_point()<<" clossed successfully";
+			cout << "\t\t\t\t\t\"" << (*it)->get_name() << "\" in location " << (*it)->get_point() << " clossed successfully";
 		}
 	}
 	else {
