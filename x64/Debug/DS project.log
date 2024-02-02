@@ -1,6 +1,11 @@
+
 ﻿  KDtree.cpp
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(25,16): error C2440: 'initializing': cannot convert from 'initializer list' to 'float'
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(25,16): message : The initializer contains too many elements
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(40,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(144,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(145,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+
+﻿  Source.cpp
+  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+

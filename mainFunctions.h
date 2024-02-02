@@ -3,8 +3,12 @@
 #include"hashTable.h"
 #include"windows.h"
 #include"stdexcept"
+#include"list"
+
 void print_menu();
+
 void print_help();
+
 void gotoxy(int x, int y) {
 	COORD coord;
 	coord.X = x;
@@ -68,7 +72,6 @@ void print_help() {
 	//Undo
 }
 
-
 void printAll(vector<coordinate> vec) {
 	int j = 1;
 	for (auto i : vec) {
@@ -78,12 +81,41 @@ void printAll(vector<coordinate> vec) {
 	}
 }
 
-void print_menu() {	
-	//names can have space
-	//don't forget to fix cin
+void update_list(list<pair<string, int>>& mostBranch, const string& name, int value) {
+
+	for (auto& pair : mostBranch) {
+		if (pair.first == name) {
+			pair.second++;
+			return;
+		}
+	}
+	mostBranch.push_back(make_pair(name, value));
+}
+
+
+void give_max(list<pair<string, int>>& mostBranch) {
+
+	int max =INT_MIN;
+	string mainBranch = "";
+	for (const auto& pair : mostBranch) {
+		if (pair.second > max) {
+			max = pair.second;
+			mainBranch = pair.first;
+		}
+	}
+	if (mainBranch != "")
+		cout << "\n\x1b[38;5;223m\t\t\t\t\t" << mainBranch<<"\x1b[38;5;220m\n";
+	else
+		cout <<"\n\x1b[38;5;223m\t\t\t\t\tNo Pizzeria added yet!\x1b[38;5;220m\n";
+	Sleep(4000);
+}
+
+void print_menu() {
+
 	KDtree tree;
 	hashTable table;
-	string input, name,mainName;
+	list<pair<string, int>> mostBranch;
+	string input, name, mainName;
 	coordinate A, B, C, D;
 	bool flag = false;
 	int R;
@@ -105,13 +137,14 @@ void print_menu() {
 			Sleep(1000);
 			system("cls");
 		}
-		else if (input=="Add-P") {
+		else if (input == "Add-P") {
 			cin >> name >> A;
 			tree.insert("", name, A, table);
 		}
 		else if (input == "Add-Br") {
 			cin >> mainName>>name >> A;
 			tree.insert(mainName,name,A, table);
+			update_list(mostBranch, name, 1);
 		}
 		else if (input == "Del-Br") {
 			cin >> name >> A;
@@ -133,6 +166,7 @@ void print_menu() {
 		else if (input == "Near-P") {
 			cin >> A;
 			tree.nearest_pizzeria(A);
+			Sleep(4000);
 		}
 		else if (input == "Near-Br") {
 			cin >> name >> A;
@@ -143,7 +177,7 @@ void print_menu() {
 			tree.pizzeria_in_circle();
 		}
 		else if (input == "Most-Brs") {
-
+			give_max(mostBranch);
 		}
 		else {
 			cout << "\t\t\t\t\tWrong input!\n";

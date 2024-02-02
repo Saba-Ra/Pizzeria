@@ -15,7 +15,7 @@ public:
 	void Delete(coordinate);
 	void pizzeria_in_region();
 	double distance(coordinate,coordinate);
-	treeNode* nearest_pizzeria(coordinate&);
+	void nearest_pizzeria(coordinate&);
 	treeNode* find_nearest( treeNode*,coordinate&,int);
 	coordinate find_nearest(coordinate&, int);
 	void nearest_branch(string, const hashTable&);

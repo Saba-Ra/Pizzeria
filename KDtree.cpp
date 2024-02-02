@@ -87,15 +87,16 @@ double KDtree::distance(coordinate node, coordinate target) {
 }
 
 treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth) {
-	if (root == NULL) return NULL;
+	if (current == NULL) return NULL;
 
-	treeNode* nextBranch = target.set_get_xy()[depth % 2] < root->get_point().set_get_xy()[depth % 2] ? root->set_get_left() : root->set_get_right();
-	treeNode* otherBranch = target.set_get_xy()[depth % 2] < root->get_point().set_get_xy()[depth % 2] ? root->set_get_right() : root->set_get_left();
+	treeNode* nextBranch = target.set_get_xy()[depth % 2] < current->get_point().set_get_xy()[depth % 2] ? current->set_get_left() : current->set_get_right();
+	treeNode* otherBranch = target.set_get_xy()[depth % 2] < current->get_point().set_get_xy()[depth % 2] ? current->set_get_right() : current->set_get_left();
 	treeNode* best = find_nearest(nextBranch, target, depth + 1);
 
 	//check the current and best distance
 	double distance_curr = distance(current->get_point(), target);
 	double distance_best = best != NULL ? distance(best->get_point(), target) : numeric_limits<double>::max();
+
 	//update best if necessary
 	if (distance_curr < distance_best)best = current;
 
@@ -113,8 +114,10 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 	return best;
 }
 
-treeNode* KDtree::nearest_pizzeria(coordinate& target) {
-	return find_nearest(root, target, 0);
+void KDtree::nearest_pizzeria(coordinate& target) {
+	treeNode*foundNode= find_nearest(root, target, 0);
+	cout <<"\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n"<<"\t\t\t\t\tName : " << foundNode->get_name()<<endl<<"\t\t\t\t\tX : "<<foundNode->get_point().set_get_xy()[0]<<endl<<"\t\t\t\t\tY : "<< foundNode->get_point().set_get_xy()[0]<<"\x1b[38;5;208m";
+	return;
 }
 
 void KDtree::nearest_branch(string name, const hashTable& table) {
