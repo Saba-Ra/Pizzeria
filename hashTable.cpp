@@ -15,7 +15,7 @@ int hashTable::hash(const string& name) {
 	}
 	return value % size;
 }
-vector<coordinate> hashTable::search(const string& name) {
+vector<coordinate>* hashTable::search(const string& name) {
 	int index = hash(name);
 	for (auto& mainBranch : table[index]) {
 		if (mainBranch.get_name() == name) {

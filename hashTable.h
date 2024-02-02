@@ -15,7 +15,7 @@ public:
 
 	int hash(const string&);
 
-	vector<coordinate> search(const string& name);
+	vector<coordinate>* search(const string& name);
 
 
 };

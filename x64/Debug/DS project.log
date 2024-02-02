@@ -1,2 +1,8 @@
+<<<<<<< Updated upstream
 ﻿  Source.cpp
   DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+=======
+﻿  hashTable.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTable.cpp(21,34): error C2440: 'return': cannot convert from 'std::vector<coordinate,std::allocator<coordinate>>' to 'std::vector<coordinate,std::allocator<coordinate>> *'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTable.cpp(21,34): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+>>>>>>> Stashed changes

@@ -12,7 +12,7 @@ private:
 public:
 	KDtree();
 	void insert(string,string, coordinate, hashTable&);
-	void Delete(coordinate);
+	void Delete(coordinate, hashTable&);
 	void pizzeria_in_region();
 	double distance(coordinate,coordinate);
 	void nearest_pizzeria(coordinate&);

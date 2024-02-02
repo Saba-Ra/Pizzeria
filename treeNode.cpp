@@ -23,3 +23,5 @@ bool treeNode::operator==(treeNode& secondNode) {
 }
 
 string  treeNode::get_name() { return this->name; }
+
+string treeNode::get_mainBranch() { return this->mainBranch; }

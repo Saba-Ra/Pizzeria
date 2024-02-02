@@ -17,10 +17,12 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 	else {
 		all_nodes.push_back(newNode);
 		buildTree();
-		if (mainBranch == "") { //which means this is a main branch and should be added to the hashtable
+
+		if (mainBranch == name) { //which means this is a main branch and should be added to the hashtable
 			hashNode newHashNode(name, point);
 			table.insert(newHashNode);
 		}
+<<<<<<< Updated upstream
 		else { //this is a branch 
 			//float x_y = { point.set_get_xy()[0], point.set_get_xy()[1] };
 			coordinate newBranch();
@@ -30,11 +32,44 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 			catch (char* error) {
 				cout << "No main branche matches the given name." << endl;
 			}
+=======
+		coordinate newBranch(point.set_get_xy());
+		try {
+			table.search(mainBranch)->push_back(newBranch);
+>>>>>>> Stashed changes
 		}
-		cout << "Your pizzeria has been successfully added!\n";
+		catch (char* error) {
+			cout << "\t\t\t\t\tNo main branche matches the given name!" << endl;
+			return;
+		}
+		cout << "\n\t\t\t\t\tYour pizzeria has been successfully added!\n";
 	}
 }
 
+void KDtree::Delete(coordinate point, hashTable& table) {
+	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
+		return node->get_point() == point;
+		});
+	if (it != all_nodes.end()) {
+		if ((*it)->get_mainBranch() == "") {
+			throw("You can not delete a main branch!");
+		}
+		else {
+			string branchName = (*it)->get_mainBranch();
+			vector<coordinate>* branches = table.search(branchName);
+			auto it2 = std::find(branches->begin(), branches->end(), point);
+			branches->erase(it2);
+
+			all_nodes.erase(it);
+			buildTree();
+
+			cout << "\t\t\t\t\t\"" << (*it)->get_name() << "\" in location " << (*it)->get_point()<<" clossed successfully";
+		}
+	}
+	else {
+		throw("There is no pizzeria at this location!");
+	}
+}
 
 void KDtree::buildTree() {
 	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
@@ -60,20 +95,6 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 	newNode->set_get_right() = buildTreeRecursive(begin + medianIndex + 1, end, depth + 1);
 
 	return newNode;
-}
-
-void KDtree::Delete(coordinate point) {
-	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
-		return node->get_point() == point;
-		});
-
-	if (it != all_nodes.end()) {
-		all_nodes.erase(it);
-		buildTree();
-	}
-	//else {
-	//	cout << " ";
-	//}
 }
 
 void KDtree::pizzeria_in_region() {
@@ -115,8 +136,8 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 }
 
 void KDtree::nearest_pizzeria(coordinate& target) {
-	treeNode*foundNode= find_nearest(root, target, 0);
-	cout <<"\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n"<<"\t\t\t\t\tName : " << foundNode->get_name()<<endl<<"\t\t\t\t\tX : "<<foundNode->get_point().set_get_xy()[0]<<endl<<"\t\t\t\t\tY : "<< foundNode->get_point().set_get_xy()[0]<<"\x1b[38;5;208m";
+	treeNode* foundNode = find_nearest(root, target, 0);
+	cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tX : " << foundNode->get_point().set_get_xy()[0] << endl << "\t\t\t\t\tY : " << foundNode->get_point().set_get_xy()[0] << "\x1b[38;5;208m";
 	return;
 }
 

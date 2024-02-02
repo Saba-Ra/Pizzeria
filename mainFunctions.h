@@ -52,16 +52,18 @@ void print_menu() {
 		}
 		else if (input == "Add-P") {
 			cin >> name >> A;
-			tree.insert("", name, A, table);
+			tree.insert(name, name, A, table);
+			Sleep(1000);
 		}
 		else if (input == "Add-Br") {
 			cin >> mainName >> name >> A;
 			tree.insert(mainName, name, A, table);
 			update_list(mostBranch, name, 1);
+			Sleep(1000);
 		}
 		else if (input == "Del-Br") {
 			cin >> name >> A;
-			tree.Delete(A);
+			tree.Delete(A, table);
 		}
 		else if (input == "List-P") {
 			cin >> name;
@@ -69,8 +71,17 @@ void print_menu() {
 		}
 		else if (input == "List-Brs") {
 			cin >> name;
+<<<<<<< Updated upstream
 			printAll(table,name);
 
+=======
+			try {
+				printAll(*(table.search(name)));
+			}
+			catch (exception error) {
+				cerr << error.what();
+			}
+>>>>>>> Stashed changes
 		}
 		else if (input == "Near-P") {
 			cin >> A;
