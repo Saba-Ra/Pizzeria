@@ -21,7 +21,7 @@ void update_list(list<pair<string, int>>&, const string&, int);
 
 void give_max(list<pair<string, int>>&);
 
-void printAll(hashTable&,string);
+void printAll(hashTable&, string);
 
 void print_menu() {
 
@@ -71,18 +71,10 @@ void print_menu() {
 		}
 		else if (input == "List-Brs") {
 			cin >> name;
-<<<<<<< Updated upstream
-			printAll(table,name);
-
-=======
-			try {
-				printAll(*(table.search(name)));
-			}
-			catch (exception error) {
-				cerr << error.what();
-			}
->>>>>>> Stashed changes
+			printAll(table, name);
 		}
+
+
 		else if (input == "Near-P") {
 			cin >> A;
 			tree.nearest_pizzeria(A);
@@ -234,9 +226,9 @@ void give_max(list<pair<string, int>>& mostBranch) {
 	Sleep(4000);
 }
 
-void printAll(hashTable&table, string name) {
-	try {
-		vector<coordinate>vec = table.search(name);
+void printAll(hashTable& table, string name) {
+	/*try {
+		vector<coordinate>*vec = table.search(name);
 		int j = 1;
 		for (auto i : vec) {
 			cout << "\t\t\t\t\tX" << j << " : " << i.set_get_xy()[0] << endl;
@@ -250,5 +242,5 @@ void printAll(hashTable&table, string name) {
 	catch (exception error) {
 		cerr << error.what();
 		Sleep(3000);
-	}
+	}*/
 }
