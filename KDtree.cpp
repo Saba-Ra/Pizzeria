@@ -135,7 +135,7 @@ void KDtree::nearest_pizzeria(coordinate& target, bool flag) {
 	treeNode* foundNode = find_nearest(root, target, 0);
 
 	if (flag)
-		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tX : " << foundNode->get_point().set_get_xy()[0] << endl << "\t\t\t\t\tY : " << foundNode->get_point().set_get_xy()[1] << "\x1b[38;5;208m";
+		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tLocation : " << foundNode->get_point() << "\x1b[38;5;208m";
 
 	else
 		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tLocation : " << foundNode->get_point() << "\x1b[38;5;208m";
@@ -166,8 +166,24 @@ void KDtree::nearest_branch(string name, coordinate point, hashTable& table) {
 
 }
 
-void KDtree::pizzeria_in_circle() {
+void KDtree::pizzeria_in_circle(const coordinate& A, float R) {
+	bool atLeastOne = false;
+	cout << "\n\t\t\t\t\t\x1b[38;5;223mPizzerias in this area:"<<endl;
+	pizzeria_traverse(A, R, root, &atLeastOne);
+	if (!atLeastOne) {
+		cout << "\n\t\t\t\t\t\x1b[38;5;223mThere is no pizzeria in this area!";
+	}
+}
 
+void KDtree::pizzeria_traverse(coordinate A, float R, treeNode* currentNode, bool* atLeastOne) {
+	if (currentNode == nullptr)
+		return;
+	if (distance(A, currentNode->get_point()) <= R) {
+		cout << "\n\t\t\t\t\x1b[38;5;223m Name : " << currentNode->get_name() << "\tLocation : " << currentNode->get_point() << endl;
+		*atLeastOne = true;
+	}
+	pizzeria_traverse(A, R, currentNode->set_get_left(), atLeastOne);
+	pizzeria_traverse(A, R, currentNode->set_get_right(), atLeastOne);
 }
 
 void KDtree::pizzeria_sort(int begin, int end, int axis, vector<treeNode*>& all_tree_nodes) {

@@ -20,7 +20,8 @@ public:
 	treeNode* find_nearest( treeNode*,coordinate&,int);
 	coordinate find_nearest(coordinate&, int);
 	void nearest_branch(string, coordinate, hashTable&);
-	void pizzeria_in_circle();
+	void pizzeria_in_circle(const coordinate&, float);
+	void pizzeria_traverse(coordinate, float, treeNode*, bool*);
 	void pizzeria_sort(int, int, int, vector<treeNode*>&);
 	void pizzeria_merge(int, int, int, int, vector<treeNode*>&);
 	treeNode* buildTreeRecursive(int, int, int, vector <treeNode*>&);

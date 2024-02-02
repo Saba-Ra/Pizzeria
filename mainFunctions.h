@@ -31,7 +31,7 @@ void print_menu() {
 	coordinate A, B, C, D;
 	neighborHood regions;
 	bool flag = false;
-	int R;
+	float R;
 	while (1) {
 		if (flag == true) {
 			print_logo();
@@ -90,7 +90,8 @@ void print_menu() {
 		}
 		else if (input == "Avail-P") {
 			cin >> R >> A;
-			tree.pizzeria_in_circle();
+			tree.pizzeria_in_circle(A, R);
+			Sleep(5000);
 		}
 		else if (input == "Most-Brs") {
 			give_max(mostBranch);
