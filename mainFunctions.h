@@ -63,7 +63,7 @@ void print_menu() {
 		}
 		else if (input == "Del-Br") {
 			cin >> A;
-			try {tree.Delete(A, table);}
+			try { tree.Delete(A, table); }
 			catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
 			Sleep(2000);
 		}
@@ -79,12 +79,14 @@ void print_menu() {
 
 		else if (input == "Near-P") {
 			cin >> A;
-			tree.nearest_pizzeria(A);
+			tree.nearest_pizzeria(A, true);
 			Sleep(4000);
 		}
 		else if (input == "Near-Br") {
 			cin >> name >> A;
-			tree.nearest_branch(name, table);
+			try { tree.nearest_branch(name, A, table); }
+			catch (exception error) { cerr << error.what(); }
+			Sleep(2000);
 		}
 		else if (input == "Avail-P") {
 			cin >> R >> A;
@@ -246,9 +248,9 @@ void give_max(list<pair<string, int>>& mostBranch) {
 
 void printAll(hashTable& table, string name) {
 	try {
-		vector<coordinate>*vec = table.search(name);
+		vector<coordinate>* vec = table.search(name);
 		int j = 1;
-		for (auto&i : *vec) {
+		for (auto& i : *vec) {
 			cout << "\n\t\t\t\t\t\x1b[38;5;223mX" << j << " : " << i.set_get_xy()[0] << endl;
 			cout << "\t\t\t\t\tY" << j << " : " << i.set_get_xy()[1] << endl;
 			j++;

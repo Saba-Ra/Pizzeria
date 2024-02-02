@@ -10,7 +10,7 @@ private:
 	treeNode* right;
 public:
 	treeNode();
-	treeNode(string name, const coordinate& node_point, string node_mainBranch, treeNode* left_child, treeNode* right_child);
+	treeNode(string, const coordinate&, string, treeNode*, treeNode*);
 	string get_name();
 	string get_mainBranch();
 	coordinate& get_point();

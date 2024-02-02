@@ -15,15 +15,15 @@ public:
 	void Delete(coordinate, hashTable&);
 	void pizzeria_in_region();
 	double distance(coordinate,coordinate);
-	void nearest_pizzeria(coordinate&);
+	void nearest_pizzeria(coordinate&, bool);
 	treeNode* find_nearest( treeNode*,coordinate&,int);
 	coordinate find_nearest(coordinate&, int);
-	void nearest_branch(string, const hashTable&);
+	void nearest_branch(string, coordinate, hashTable&);
 	void pizzeria_in_circle();
-	void pizzeria_sort(int, int, int);
-	void pizzeria_merge(int, int, int, int);
-	treeNode* buildTreeRecursive(int, int, int);
-	void buildTree();
+	void pizzeria_sort(int, int, int, vector<treeNode*>&);
+	void pizzeria_merge(int, int, int, int, vector<treeNode*>&);
+	treeNode* buildTreeRecursive(int, int, int, vector <treeNode*>&);
+	void buildTree(vector<treeNode*>&);
 	~KDtree();
 };
 

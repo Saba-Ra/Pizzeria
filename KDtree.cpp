@@ -5,7 +5,6 @@ KDtree::KDtree() {
 	root = NULL;
 }
 
-
 void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table) {
 	treeNode* newNode = new treeNode(name, point, mainBranch, NULL, NULL);
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
@@ -26,7 +25,7 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 		}
 
 		all_nodes.push_back(newNode);
-		buildTree();
+		buildTree(all_nodes);
 
 		if (mainBranch == name) { //which means this is a main branch and should be added to the hashtable
 			hashNode newHashNode(name, point);
@@ -54,7 +53,7 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 			branches->erase(it2);
 
 			all_nodes.erase(it);
-			buildTree();
+			buildTree(all_nodes);
 
 			cout << "\n\t\t\t\t\t\"" << deletedName << "\" in location " << point << " clossed successfully";
 		}
@@ -64,11 +63,11 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 	}
 }
 
-void KDtree::buildTree() {
-	root = buildTreeRecursive(0, all_nodes.size() - 1, 0);
+void KDtree::buildTree(vector<treeNode*>& all_tree_nodes) {
+	root = buildTreeRecursive(0, all_tree_nodes.size() - 1, 0, all_tree_nodes);
 }
 
-treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
+treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth, vector<treeNode*>& all_tree_nodes) {
 	if (begin > end) {
 		return nullptr;
 	}
@@ -76,16 +75,16 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 	int axis = depth % 2;
 
 	// Sort points based on the current axis that is x or y
-	this->KDtree::pizzeria_sort(begin, end, axis);
+	this->KDtree::pizzeria_sort(begin, end, axis, all_tree_nodes);
 
 	// Find the median point
 	int medianIndex = (end - begin + 1) / 2;
 
 	// Create a node and recursively build left and right subtrees
 	treeNode* newNode;
-	newNode = all_nodes[begin + medianIndex];
-	newNode->set_get_left() = buildTreeRecursive(begin, begin + medianIndex - 1, depth + 1);
-	newNode->set_get_right() = buildTreeRecursive(begin + medianIndex + 1, end, depth + 1);
+	newNode = all_tree_nodes[begin + medianIndex];
+	newNode->set_get_left() = buildTreeRecursive(begin, begin + medianIndex - 1, depth + 1, all_tree_nodes);
+	newNode->set_get_right() = buildTreeRecursive(begin + medianIndex + 1, end, depth + 1, all_tree_nodes);
 
 	return newNode;
 }
@@ -128,13 +127,37 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 	return best;
 }
 
-void KDtree::nearest_pizzeria(coordinate& target) {
+void KDtree::nearest_pizzeria(coordinate& target, bool flag) {
 	treeNode* foundNode = find_nearest(root, target, 0);
-	cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tX : " << foundNode->get_point().set_get_xy()[0] << endl << "\t\t\t\t\tY : " << foundNode->get_point().set_get_xy()[0] << "\x1b[38;5;208m";
+	if (flag) {
+		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tX : " << foundNode->get_point().set_get_xy()[0] << endl << "\t\t\t\t\tY : " << foundNode->get_point().set_get_xy()[1] << "\x1b[38;5;208m";
+	}
+	else {
+		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tLocation : " << foundNode->get_point() << "\x1b[38;5;208m";
+	}
 	return;
 }
 
-void KDtree::nearest_branch(string name, const hashTable& table) {
+void KDtree::nearest_branch(string name, coordinate point, hashTable& table) {
+	vector<coordinate> branches = *(table.search(name));
+	vector<treeNode*> all_branch_nodes;
+	for (auto i = branches.begin(); i != branches.end(); i++) {
+		treeNode* newNode = new treeNode();
+		newNode->get_point().set_get_xy()[0] = (*i).set_get_xy()[0];
+		newNode->get_point().set_get_xy()[1] = (*i).set_get_xy()[1];
+		all_branch_nodes.push_back(newNode);
+	}
+
+	KDtree mainBranchTree;
+	mainBranchTree.buildTree(all_branch_nodes);
+	bool flag = false;
+	mainBranchTree.nearest_pizzeria(point, flag);
+
+	//for (treeNode* node : all_branch_nodes) {
+	//	delete node;
+	//	node = nullptr;  // Nullify the pointer after deletion
+	//}
+	//all_branch_nodes.clear();  // Clear the vector after deleting all nodes
 
 }
 
@@ -142,16 +165,16 @@ void KDtree::pizzeria_in_circle() {
 
 }
 
-void KDtree::pizzeria_sort(int begin, int end, int axis) {
+void KDtree::pizzeria_sort(int begin, int end, int axis, vector<treeNode*>& all_tree_nodes) {
 	if (begin < end) {
 		int middle = (end - begin) / 2;
-		pizzeria_sort(begin, begin + middle, axis);
-		pizzeria_sort(begin + middle + 1, end, axis);
-		pizzeria_merge(begin, begin + middle, end, axis);
+		pizzeria_sort(begin, begin + middle, axis, all_tree_nodes);
+		pizzeria_sort(begin + middle + 1, end, axis, all_tree_nodes);
+		pizzeria_merge(begin, begin + middle, end, axis, all_tree_nodes);
 	}
 }
 
-void KDtree::pizzeria_merge(int begin, int middle, int end, int axis) {
+void KDtree::pizzeria_merge(int begin, int middle, int end, int axis, vector<treeNode*>& all_tree_nodes) {
 	int size1 = middle - begin + 1;
 	int size2 = end - middle;
 
@@ -162,17 +185,17 @@ void KDtree::pizzeria_merge(int begin, int middle, int end, int axis) {
 	right[size2].get_point().set_get_xy()[axis] = numeric_limits<double>::infinity();
 
 	for (int i = 0; i < size1; i++)
-		left[i] = *all_nodes[begin + i];
-	for (int i = 0; i < size2; i++)
-		right[i] = *all_nodes[middle + 1 + i];
+		left[i] = *all_tree_nodes[begin + i];
+	for (int j = 0; j < size2; j++)
+		right[j] = *all_tree_nodes[middle + 1 + j];
 
 	for (int i = 0, j = 0, k = begin; k <= end; k++) {
 		if (left[i].get_point().set_get_xy()[axis] < right[j].get_point().set_get_xy()[axis]) {
-			all_nodes[k] = &left[i];
+			all_tree_nodes[k] = &left[i];
 			i++;
 		}
 		else {
-			all_nodes[k] = &right[j];
+			all_tree_nodes[k] = &right[j];
 			j++;
 		}
 	}
