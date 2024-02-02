@@ -107,11 +107,11 @@ void print_menu() {
 		}
 		else if (input=="Add-P") {
 			cin >> name >> A;
-			tree.insert("", name, A);
+			tree.insert("", name, A, table);
 		}
 		else if (input == "Add-Br") {
 			cin >> mainName>>name >> A;
-			tree.insert(mainName,name,A);
+			tree.insert(mainName,name,A, table);
 		}
 		else if (input == "Del-Br") {
 			cin >> name >> A;
@@ -136,7 +136,7 @@ void print_menu() {
 		}
 		else if (input == "Near-Br") {
 			cin >> name >> A;
-			tree.nearest_branch();
+			tree.nearest_branch(name, table);
 		}
 		else if (input == "Avail-P") {
 			cin >> R >> A;

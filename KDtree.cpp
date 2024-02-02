@@ -6,17 +6,32 @@ KDtree::KDtree() {
 }
 
 
-void KDtree::insert(string mainBranch, string name, const coordinate& point) {
+void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table) {
 	treeNode* newNode = new treeNode(name, point, mainBranch, NULL, NULL);
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
 		});
 	if (it != all_nodes.end()) {
-		cout << "There is a pizeeria here!";
+		cout << "There is another pizzeria at this location!\n";
 	}
 	else {
 		all_nodes.push_back(newNode);
 		buildTree();
+		if (mainBranch == "") { //which means this is a main branch and should be added to the hashtable
+			hashNode newHashNode(name, point);
+			table.insert(newHashNode);
+		}
+		else { //this is a branch 
+			float x_y = { point.set_get_xy()[0], point.set_get_xy()[1] };
+			coordinate newBranch();
+			try {
+				/*table.search(name).push_back(newBranch);*/
+			}
+			catch (char* error) {
+				cout << "No main branche matches the given name." << endl;
+			}
+		}
+		cout << "Your pizzeria has been successfully added!\n";
 	}
 }
 
@@ -40,15 +55,15 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth) {
 
 	// Create a node and recursively build left and right subtrees
 	treeNode* newNode;
-	newNode = all_nodes[begin+medianIndex];
-	newNode->set_get_left() = buildTreeRecursive(begin, begin+medianIndex-1, depth + 1);
-	newNode->set_get_right() = buildTreeRecursive(begin+medianIndex + 1, end, depth + 1);
+	newNode = all_nodes[begin + medianIndex];
+	newNode->set_get_left() = buildTreeRecursive(begin, begin + medianIndex - 1, depth + 1);
+	newNode->set_get_right() = buildTreeRecursive(begin + medianIndex + 1, end, depth + 1);
 
 	return newNode;
 }
 
 void KDtree::Delete(coordinate point) {
-	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&]( treeNode* node) {
+	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
 		});
 
@@ -102,7 +117,7 @@ treeNode* KDtree::nearest_pizzeria(coordinate& target) {
 	return find_nearest(root, target, 0);
 }
 
-void KDtree::nearest_branch() {
+void KDtree::nearest_branch(string name, const hashTable& table) {
 
 }
 
@@ -113,9 +128,9 @@ void KDtree::pizzeria_in_circle() {
 void KDtree::pizzeria_sort(int begin, int end, int axis) {
 	if (begin < end) {
 		int middle = (end - begin) / 2;
-		pizzeria_sort(begin, begin+middle, axis);
-		pizzeria_sort(begin+middle + 1, end, axis);
-		pizzeria_merge(begin, begin+middle, end, axis);
+		pizzeria_sort(begin, begin + middle, axis);
+		pizzeria_sort(begin + middle + 1, end, axis);
+		pizzeria_merge(begin, begin + middle, end, axis);
 	}
 }
 
