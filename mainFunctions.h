@@ -4,111 +4,24 @@
 #include"windows.h"
 #include"stdexcept"
 #include"list"
+#include"conio.h"
 
-void print_menu();
+
+void gotoxy(int, int);
+
+void logo_loading();
+
+void help_loading();
+
+void print_logo();
 
 void print_help();
 
-void gotoxy(int x, int y) {
-	COORD coord;
-	coord.X = x;
-	coord.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
+void update_list(list<pair<string, int>>&, const string&, int);
 
-void logo_loading() {
-	SetConsoleOutputCP(65001);
-	cout << "\x1b[38;5;124m";
-	int total = 90; // Total number of steps
-	string loadingWord =
-		"\t\t\t\t██████╗ ██╗██████╗██████╗███████╗██████╗ ██╗██████╗\n"
-		"\t\t\t\t██╔══██╗██║   ██╔╝   ██╔╝██╔════╝██╔══██╗██║██ ║██║\n"
-		"\t\t\t\t██████╔╝██║  ██╔╝   ██╔╝ █████╗  ██████╔╝██║██████║\n"
-		"\t\t\t\t██╔═══╝ ██║ ██╔╝   ██╔╝  ██╔══╝  ██╔══██╗██║██  ██║\n"
-		"\t\t\t\t██║     ██║██████║██████║███████╗██║  ██║██║██  ██║\n"
-		"\t\t\t\t╚═╝     ╚═╝╚═════╝╚═════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝ ╚═╝\033[0m\n\n";
+void give_max(list<pair<string, int>>&);
 
-	cout << "\n\n\n\n";
-
-	for (int i = 0; i < total; ++i) {
-		gotoxy(0, 4);
-		cout << loadingWord.substr(0, i * loadingWord.size() / total);
-		Sleep(35);
-	}
-
-	gotoxy(0, 4);
-	cout << loadingWord << std::endl;
-	print_help();
-	print_menu();
-}
-
-void print_logo() {
-
-	cout << "\n\n\n\n";
-	cout << "\x1b[38;5;124m"
-		"\t\t\t\t██████╗ ██╗██████╗██████╗███████╗██████╗ ██╗██████╗\n"
-		"\t\t\t\t██╔══██╗██║   ██╔╝   ██╔╝██╔════╝██╔══██╗██║██ ║██║\n"
-		"\t\t\t\t██████╔╝██║  ██╔╝   ██╔╝ █████╗  ██████╔╝██║██████║\n"
-		"\t\t\t\t██╔═══╝ ██║ ██╔╝   ██╔╝  ██╔══╝  ██╔══██╗██║██  ██║\n"
-		"\t\t\t\t██║     ██║██████║██████║███████╗██║  ██║██║██  ██║\n"
-		"\t\t\t\t╚═╝     ╚═╝╚═════╝╚═════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝ ╚═╝\033[0m\n\n\n";
-
-}
-
-void print_help() {
-	//help menu
-	cout << "\x1b[38;5;208m";
-	cout << "\t\t\t\t\t\t--------help---------\n"
-		"\t\t\t\t\tAdd-N name\n"
-		"\t\t\t\t\tAdd-P name \n"
-		"\t\t\t\t\tAdd-Br mainBranch name \n"
-		"\t\t\t\t\tDel-Br \n"
-		"\t\t\t\t\tList-P regionName\n"
-		"\t\t\t\t\tList-Brs namePizzeria\n"
-		"\t\t\t\t\tNear-P \n"
-		"\t\t\t\t\tNear-Br name \n"
-		"\t\t\t\t\tAvail-P radius \n"
-		"\t\t\t\t\tMost-Brs\n\n";
-	//Undo
-}
-
-void printAll(vector<coordinate> vec) {
-	int j = 1;
-	for (auto i : vec) {
-		cout << "X" << j << " : " << i.set_get_xy()[0];
-		cout << "Y" << j << " : " << i.set_get_xy()[1];
-		j++;
-	}
-}
-
-void update_list(list<pair<string, int>>& mostBranch, const string& name, int value) {
-
-	for (auto& pair : mostBranch) {
-		if (pair.first == name) {
-			pair.second++;
-			return;
-		}
-	}
-	mostBranch.push_back(make_pair(name, value));
-}
-
-
-void give_max(list<pair<string, int>>& mostBranch) {
-
-	int max =INT_MIN;
-	string mainBranch = "";
-	for (const auto& pair : mostBranch) {
-		if (pair.second > max) {
-			max = pair.second;
-			mainBranch = pair.first;
-		}
-	}
-	if (mainBranch != "")
-		cout << "\n\x1b[38;5;223m\t\t\t\t\t" << mainBranch<<"\x1b[38;5;220m\n";
-	else
-		cout <<"\n\x1b[38;5;223m\t\t\t\t\tNo Pizzeria added yet!\x1b[38;5;220m\n";
-	Sleep(4000);
-}
+void printAll(hashTable&,string);
 
 void print_menu() {
 
@@ -142,8 +55,8 @@ void print_menu() {
 			tree.insert("", name, A, table);
 		}
 		else if (input == "Add-Br") {
-			cin >> mainName>>name >> A;
-			tree.insert(mainName,name,A, table);
+			cin >> mainName >> name >> A;
+			tree.insert(mainName, name, A, table);
 			update_list(mostBranch, name, 1);
 		}
 		else if (input == "Del-Br") {
@@ -156,12 +69,8 @@ void print_menu() {
 		}
 		else if (input == "List-Brs") {
 			cin >> name;
-			try {
-				printAll(table.search(name));
-			}
-			catch (exception error) {
-				cerr << error.what();
-			}
+			printAll(table,name);
+
 		}
 		else if (input == "Near-P") {
 			cin >> A;
@@ -184,5 +93,151 @@ void print_menu() {
 			Sleep(1000);
 		}
 		system("cls");
+	}
+}
+
+void gotoxy(int x, int y) {
+	COORD coord;
+	coord.X = x;
+	coord.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void logo_loading() {
+	SetConsoleOutputCP(65001);
+	cout << "\x1b[38;5;124m";
+	int total = 90; // Total number of steps
+	string loadingWord =
+		"\t\t\t\t██████╗ ██╗██████╗██████╗███████╗██████╗ ██╗██████╗\n"
+		"\t\t\t\t██╔══██╗██║   ██╔╝   ██╔╝██╔════╝██╔══██╗██║██ ║██║\n"
+		"\t\t\t\t██████╔╝██║  ██╔╝   ██╔╝ █████╗  ██████╔╝██║██████║\n"
+		"\t\t\t\t██╔═══╝ ██║ ██╔╝   ██╔╝  ██╔══╝  ██╔══██╗██║██  ██║\n"
+		"\t\t\t\t██║     ██║██████║██████║███████╗██║  ██║██║██  ██║\n"
+		"\t\t\t\t╚═╝     ╚═╝╚═════╝╚═════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝ ╚═╝\033[0m\n\n";
+
+	cout << "\n\n\n\n";
+
+	for (int i = 0; i < total; ++i) {
+		gotoxy(0, 4);
+		cout << loadingWord.substr(0, i * loadingWord.size() / total);
+		Sleep(30);
+	}
+
+	gotoxy(0, 4);
+	cout << loadingWord << std::endl;
+	help_loading();
+	print_menu();
+}
+
+void help_loading() {
+	//Hide cursor
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+	cursorInfo.bVisible = false;
+	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+
+	//Help menu
+	std::string helpMenu =
+		"\x1b[38;5;208m"
+		"\t\t\t\t\t\t--------help---------\n"
+		"\t\t\t\t\tAdd-N name\n"
+		"\t\t\t\t\tAdd-P name \n"
+		"\t\t\t\t\tAdd-Br mainBranch name \n"
+		"\t\t\t\t\tDel-Br \n"
+		"\t\t\t\t\tList-P regionName\n"
+		"\t\t\t\t\tList-Brs namePizzeria\n"
+		"\t\t\t\t\tNear-P \n"
+		"\t\t\t\t\tNear-Br name \n"
+		"\t\t\t\t\tAvail-P radius \n"
+		"\t\t\t\t\tMost-Brs\n\n";
+
+	//Load menu line by line
+	for (int i = 0; i < helpMenu.size(); ++i) {
+		//one character at a time
+		cout << helpMenu[i];
+		Sleep(10);
+	}
+
+	// Show cursor
+	cursorInfo.bVisible = true;
+	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+
+}
+
+void print_logo() {
+
+	cout << "\n\n\n\n";
+	cout << "\x1b[38;5;124m"
+		"\t\t\t\t██████╗ ██╗██████╗██████╗███████╗██████╗ ██╗██████╗\n"
+		"\t\t\t\t██╔══██╗██║   ██╔╝   ██╔╝██╔════╝██╔══██╗██║██ ║██║\n"
+		"\t\t\t\t██████╔╝██║  ██╔╝   ██╔╝ █████╗  ██████╔╝██║██████║\n"
+		"\t\t\t\t██╔═══╝ ██║ ██╔╝   ██╔╝  ██╔══╝  ██╔══██╗██║██  ██║\n"
+		"\t\t\t\t██║     ██║██████║██████║███████╗██║  ██║██║██  ██║\n"
+		"\t\t\t\t╚═╝     ╚═╝╚═════╝╚═════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝ ╚═╝\033[0m\n\n\n";
+
+}
+
+void print_help() {
+	//help menu
+	cout << "\x1b[38;5;208m";
+	cout << "\t\t\t\t\t\t--------help---------\n"
+		"\t\t\t\t\tAdd-N name\n"
+		"\t\t\t\t\tAdd-P name \n"
+		"\t\t\t\t\tAdd-Br mainBranch name \n"
+		"\t\t\t\t\tDel-Br \n"
+		"\t\t\t\t\tList-P regionName\n"
+		"\t\t\t\t\tList-Brs namePizzeria\n"
+		"\t\t\t\t\tNear-P \n"
+		"\t\t\t\t\tNear-Br name \n"
+		"\t\t\t\t\tAvail-P radius \n"
+		"\t\t\t\t\tMost-Brs\n\n";
+	//Undo
+}
+
+void update_list(list<pair<string, int>>& mostBranch, const string& name, int value) {
+
+	for (auto& pair : mostBranch) {
+		if (pair.first == name) {
+			pair.second++;
+			return;
+		}
+	}
+	mostBranch.push_back(make_pair(name, value));
+}
+
+void give_max(list<pair<string, int>>& mostBranch) {
+
+	int max = INT_MIN;
+	string mainBranch = "";
+	for (const auto& pair : mostBranch) {
+		if (pair.second > max) {
+			max = pair.second;
+			mainBranch = pair.first;
+		}
+	}
+	if (mainBranch != "")
+		cout << "\n\x1b[38;5;223m\t\t\t\t\t" << mainBranch << "\x1b[38;5;220m\n";
+	else
+		cout << "\n\x1b[38;5;223m\t\t\t\t\tNo Pizzeria added yet!\x1b[38;5;220m\n";
+	Sleep(4000);
+}
+
+void printAll(hashTable&table, string name) {
+	try {
+		vector<coordinate>vec = table.search(name);
+		int j = 1;
+		for (auto i : vec) {
+			cout << "\t\t\t\t\tX" << j << " : " << i.set_get_xy()[0] << endl;
+			cout << "\t\t\t\t\tY" << j << " : " << i.set_get_xy()[1] << endl;
+			j++;
+		}
+		cout << "\t\t\t\t\tPress any key to go back\n";
+		while (!_kbhit()) {}
+		_getch();
+	}
+	catch (exception error) {
+		cerr << error.what();
+		Sleep(3000);
 	}
 }

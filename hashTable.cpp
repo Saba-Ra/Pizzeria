@@ -1,5 +1,6 @@
 #include "hashTable.h"
 
+
 hashTable::hashTable() : size(47), table(47) {}
 
 void hashTable::insert(hashNode& Node) {
@@ -21,6 +22,5 @@ vector<coordinate> hashTable::search(const string& name) {
 			return mainBranch.get_branches();
 		}
 	}
-	throw runtime_error("No branches found for the given name.");
+	throw runtime_error("\t\t\t\t\tNo branches found for the given name.");
 }
-

@@ -22,7 +22,7 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 			table.insert(newHashNode);
 		}
 		else { //this is a branch 
-			float x_y = { point.set_get_xy()[0], point.set_get_xy()[1] };
+			//float x_y = { point.set_get_xy()[0], point.set_get_xy()[1] };
 			coordinate newBranch();
 			try {
 				/*table.search(name).push_back(newBranch);*/
