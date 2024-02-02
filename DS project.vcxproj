@@ -131,6 +131,7 @@
     <ClCompile Include="hashNode.cpp" />
     <ClCompile Include="hashTable.cpp" />
     <ClCompile Include="KDtree.cpp" />
+    <ClCompile Include="neighborHood.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="treeNode.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="hashTable.h" />
     <ClInclude Include="KDtree.h" />
     <ClInclude Include="mainFunctions.h" />
+    <ClInclude Include="neighborHood.h" />
     <ClInclude Include="treeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

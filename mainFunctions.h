@@ -1,11 +1,10 @@
 #pragma once
 #include"KDtree.h"
 #include"hashTable.h"
-#include"windows.h"
 #include"stdexcept"
 #include"list"
 #include"conio.h"
-
+#include"neighborHood.h"
 
 void gotoxy(int, int);
 
@@ -30,6 +29,7 @@ void print_menu() {
 	list<pair<string, int>> mostBranch;
 	string input, name, mainName;
 	coordinate A, B, C, D;
+	neighborHood regions;
 	bool flag = false;
 	int R;
 	while (1) {
@@ -43,10 +43,10 @@ void print_menu() {
 		cin >> input;
 		if (input == "Add-N") {
 			cin >> name;
-			cout << "\t\t\t\t\t\x1b[38;5;208mNow enter 4 coordinates :\x1b[38;5;220m\n";
+			cout << "\n\t\t\t\t\t\x1b[38;5;223mNow enter 4 coordinates :\x1b[38;5;220m\n";
 			cin >> A >> B >> C >> D;
-			//region insert
-			cout << "\t\t\t\t\t\x1b[38;5;208mRegion added successfully \x1b[38;5;220m\n";
+			regions.insert( name, regions.make_vec(A,B,C,D));
+			cout << "\n\t\t\t\t\t\x1b[38;5;223mRegion added successfully \x1b[38;5;220m\n";
 			Sleep(1000);
 			system("cls");
 		}
@@ -264,3 +264,4 @@ void printAll(hashTable& table, string name) {
 		Sleep(3000);
 	}
 }
+

@@ -11,6 +11,7 @@ private:
 	vector<treeNode*> all_nodes;
 public:
 	KDtree();
+	treeNode* getRoot();
 	void insert(string,string, coordinate, hashTable&);
 	void Delete(coordinate, hashTable&);
 	void pizzeria_in_region();
