@@ -22,5 +22,5 @@ vector<coordinate>* hashTable::search(const string& name) {
 			return &mainBranch.get_branches();
 		}
 	}
-	throw runtime_error("\t\t\t\t\tNo branches found for the given name.");
+	throw runtime_error("\x1b[38;5;223m\t\t\t\t\tNo branches found for the given name.\x1b[38;5;220m");
 }

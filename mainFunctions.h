@@ -58,7 +58,7 @@ void print_menu() {
 		else if (input == "Add-Br") {
 			cin >> mainName >> name >> A;
 			tree.insert(mainName, name, A, table);
-			update_list(mostBranch, name, 1);
+			update_list(mostBranch, mainName, 1);
 			Sleep(1000);
 		}
 		else if (input == "Del-Br") {
@@ -107,7 +107,14 @@ void gotoxy(int x, int y) {
 }
 
 void logo_loading() {
-	SetConsoleOutputCP(65001);
+
+	//Hide cursor
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+	cursorInfo.bVisible = false;
+	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
+
 	cout << "\x1b[38;5;124m";
 	int total = 90; // Total number of steps
 	string loadingWord =
@@ -133,12 +140,6 @@ void logo_loading() {
 }
 
 void help_loading() {
-	//Hide cursor
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cursorInfo;
-	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
-	cursorInfo.bVisible = false;
-	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 
 	//Help menu
 	std::string helpMenu =
@@ -163,6 +164,9 @@ void help_loading() {
 	}
 
 	// Show cursor
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(consoleHandle, &cursorInfo);
 	cursorInfo.bVisible = true;
 	SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 
@@ -209,38 +213,50 @@ void update_list(list<pair<string, int>>& mostBranch, const string& name, int va
 	mostBranch.push_back(make_pair(name, value));
 }
 
+//there was no need to sort the list to extract the max
+//sort has been implemented in insert
 void give_max(list<pair<string, int>>& mostBranch) {
-
 	int max = INT_MIN;
-	string mainBranch = "";
+	list<string> mainBranches;
 	for (const auto& pair : mostBranch) {
 		if (pair.second > max) {
 			max = pair.second;
-			mainBranch = pair.first;
+			mainBranches.clear(); // clear previous list
+			mainBranches.push_back(pair.first); // add the new max branch
+		}
+		else if (pair.second == max) {
+			mainBranches.push_back(pair.first); // list of mainBranches with same max value
 		}
 	}
-	if (mainBranch != "")
-		cout << "\n\x1b[38;5;223m\t\t\t\t\t" << mainBranch << "\x1b[38;5;220m\n";
-	else
-		cout << "\n\x1b[38;5;223m\t\t\t\t\tNo Pizzeria added yet!\x1b[38;5;220m\n";
+
+	if (!mainBranches.empty()) {
+		cout << "\n\x1b[38;5;223m\t\t\t\t\tMax branch(s):\n";
+		for (const auto& branch : mainBranches) {
+			cout << "\t\t\t\t\t" << branch << "\n";
+		}
+	}
+	else {
+		cout << "\n\x1b[38;5;223m\t\t\t\t\tNo Pizzeria added yet!\n";
+	}
+	cout << "\x1b[38;5;220m";
 	Sleep(4000);
 }
 
 void printAll(hashTable& table, string name) {
-	/*try {
+	try {
 		vector<coordinate>*vec = table.search(name);
 		int j = 1;
-		for (auto i : vec) {
-			cout << "\t\t\t\t\tX" << j << " : " << i.set_get_xy()[0] << endl;
+		for (auto&i : *vec) {
+			cout << "\n\t\t\t\t\t\x1b[38;5;223mX" << j << " : " << i.set_get_xy()[0] << endl;
 			cout << "\t\t\t\t\tY" << j << " : " << i.set_get_xy()[1] << endl;
 			j++;
 		}
-		cout << "\t\t\t\t\tPress any key to go back\n";
+		cout << "\n\t\t\t\t\tPress any key to go back\n\x1b[38;5;220m";
 		while (!_kbhit()) {}
 		_getch();
 	}
 	catch (exception error) {
 		cerr << error.what();
 		Sleep(3000);
-	}*/
+	}
 }
