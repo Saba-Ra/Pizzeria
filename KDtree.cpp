@@ -4,10 +4,9 @@
 KDtree::KDtree() {
 	root = NULL;
 }
-<<<<<<< Updated upstream
-=======
+
 treeNode* KDtree::getRoot() { return this->root; }
->>>>>>> Stashed changes
+
 
 void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table) {
 	treeNode* newNode = new treeNode(name, point, mainBranch, NULL, NULL);
@@ -134,16 +133,13 @@ treeNode* KDtree::find_nearest(treeNode* current, coordinate& target, int depth)
 
 void KDtree::nearest_pizzeria(coordinate& target, bool flag) {
 	treeNode* foundNode = find_nearest(root, target, 0);
-<<<<<<< Updated upstream
-	if (flag) {
+
+	if (flag)
 		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tX : " << foundNode->get_point().set_get_xy()[0] << endl << "\t\t\t\t\tY : " << foundNode->get_point().set_get_xy()[1] << "\x1b[38;5;208m";
-	}
-	else {
+
+	else
 		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tLocation : " << foundNode->get_point() << "\x1b[38;5;208m";
-	}
-=======
-	cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tX : " << foundNode->get_point().set_get_xy()[0] << endl << "\t\t\t\t\tY : " << foundNode->get_point().set_get_xy()[1] << "\x1b[38;5;208m";
->>>>>>> Stashed changes
+
 	return;
 }
 

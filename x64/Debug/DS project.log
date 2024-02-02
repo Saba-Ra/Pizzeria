@@ -1,7 +1,8 @@
-<<<<<<< Updated upstream
-﻿  Source.cpp
-  DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe
-=======
-﻿  neighborHood.cpp
+﻿  KDtree.cpp
+D:\DS final project\Pizzeria\KDtree.cpp(70,53): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\DS final project\Pizzeria\KDtree.cpp(189,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\DS final project\Pizzeria\KDtree.cpp(190,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  neighborHood.cpp
+  treeNode.cpp
+  Generating Code...
   DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
->>>>>>> Stashed changes
