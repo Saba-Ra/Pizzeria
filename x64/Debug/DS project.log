@@ -1,8 +1,19 @@
-<<<<<<< Updated upstream
-﻿  Source.cpp
-  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
-=======
-﻿  hashTable.cpp
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTable.cpp(21,34): error C2440: 'return': cannot convert from 'std::vector<coordinate,std::allocator<coordinate>>' to 'std::vector<coordinate,std::allocator<coordinate>> *'
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTable.cpp(21,34): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
->>>>>>> Stashed changes
+﻿  hashNode.cpp
+  hashTable.cpp
+  KDtree.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(29,16): warning C4101: 'error': unreferenced local variable
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(63,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(156,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(157,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Source.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(74,1): error C2059: syntax error: '<<'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(77,1): error C2059: syntax error: '=='
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(78,8): error C2143: syntax error: missing ';' before '{'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(79,5): error C2660: 'printAll': function does not take 1 arguments
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(24,6): message : see declaration of 'printAll'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(79,5): message : while trying to match the argument list '(std::vector<coordinate,std::allocator<coordinate>>)'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(81,4): error C2318: no try block associated with this catch handler
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(84,1): error C2059: syntax error: '>>'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(239,25): error C2440: 'initializing': cannot convert from 'std::vector<coordinate,std::allocator<coordinate>> *' to 'std::vector<coordinate,std::allocator<coordinate>>'
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\mainFunctions.h(239,25): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+  Generating Code...

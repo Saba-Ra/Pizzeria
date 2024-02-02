@@ -22,21 +22,9 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 			hashNode newHashNode(name, point);
 			table.insert(newHashNode);
 		}
-<<<<<<< Updated upstream
-		else { //this is a branch 
-			//float x_y = { point.set_get_xy()[0], point.set_get_xy()[1] };
-			coordinate newBranch();
-			try {
-				/*table.search(name).push_back(newBranch);*/
-			}
-			catch (char* error) {
-				cout << "No main branche matches the given name." << endl;
-			}
-=======
 		coordinate newBranch(point.set_get_xy());
 		try {
 			table.search(mainBranch)->push_back(newBranch);
->>>>>>> Stashed changes
 		}
 		catch (char* error) {
 			cout << "\t\t\t\t\tNo main branche matches the given name!" << endl;

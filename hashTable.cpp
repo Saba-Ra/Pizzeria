@@ -19,7 +19,7 @@ vector<coordinate>* hashTable::search(const string& name) {
 	int index = hash(name);
 	for (auto& mainBranch : table[index]) {
 		if (mainBranch.get_name() == name) {
-			return mainBranch.get_branches();
+			return &mainBranch.get_branches();
 		}
 	}
 	throw runtime_error("\t\t\t\t\tNo branches found for the given name.");

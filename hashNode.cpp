@@ -10,4 +10,4 @@ hashNode::hashNode(string name, const coordinate& point, const vector<coordinate
 	this->branches = branches;
 }
 string hashNode::get_name() { return this->name; }
-vector<coordinate> hashNode::get_branches() { return this->branches; }
+vector<coordinate>& hashNode::get_branches() { return this->branches; }

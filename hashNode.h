@@ -13,6 +13,6 @@ public:
 	hashNode(string name, const coordinate&);
 	hashNode(string name,const coordinate&, const vector<coordinate>&);
 	string get_name();
-	vector<coordinate> get_branches();
+	vector<coordinate>& get_branches();
 };
 
