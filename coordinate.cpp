@@ -15,7 +15,7 @@ istream& operator>>(istream& in, coordinate& point) {
 };
 
 ostream& operator<<(ostream& out, const coordinate& point) {
-	cout << "\t\t\t\t\t("<< point.x_y[0]<<","<<point.x_y[1]<<")";
+	cout << "("<< point.x_y[0]<<","<<point.x_y[1]<<")";
 	return out;
 };
 

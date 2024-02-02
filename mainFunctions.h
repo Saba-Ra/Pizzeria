@@ -53,17 +53,19 @@ void print_menu() {
 		else if (input == "Add-P") {
 			cin >> name >> A;
 			tree.insert(name, name, A, table);
-			Sleep(1000);
+			Sleep(2000);
 		}
 		else if (input == "Add-Br") {
 			cin >> mainName >> name >> A;
 			tree.insert(mainName, name, A, table);
 			update_list(mostBranch, mainName, 1);
-			Sleep(1000);
+			Sleep(2000);
 		}
 		else if (input == "Del-Br") {
-			cin >> name >> A;
-			tree.Delete(A, table);
+			cin >> A;
+			try {tree.Delete(A, table);}
+			catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
+			Sleep(2000);
 		}
 		else if (input == "List-P") {
 			cin >> name;

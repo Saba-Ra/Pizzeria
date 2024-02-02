@@ -43,19 +43,20 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 		return node->get_point() == point;
 		});
 	if (it != all_nodes.end()) {
-		if ((*it)->get_mainBranch() == "") {
-			throw("\t\t\t\t\tYou can not delete a main branch!");
+		if ((*it)->get_mainBranch() == (*it)->get_name()) {
+			throw("You can not delete a main branch!");
 		}
 		else {
 			string branchName = (*it)->get_mainBranch();
 			vector<coordinate>* branches = table.search(branchName);
 			auto it2 = std::find(branches->begin(), branches->end(), point);
+			string deletedName = (*it)->get_name();
 			branches->erase(it2);
 
 			all_nodes.erase(it);
 			buildTree();
 
-			cout << "\t\t\t\t\t\"" << (*it)->get_name() << "\" in location " << (*it)->get_point() << " clossed successfully";
+			cout << "\n\t\t\t\t\t\"" << deletedName << "\" in location " << point << " clossed successfully";
 		}
 	}
 	else {
