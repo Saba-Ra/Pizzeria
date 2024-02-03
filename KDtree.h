@@ -2,6 +2,7 @@
 #include"treeNode.h"
 #include <vector>
 #include <limits>
+#include <list>
 #include"hashTable.h"
 using namespace std;
 class KDtree
@@ -13,7 +14,7 @@ public:
 	KDtree();
 	treeNode* getRoot();
 	void insert(string,string, coordinate, hashTable&);
-	void Delete(coordinate, hashTable&);
+	void Delete(coordinate, hashTable&, list<pair<string, int>>&);
 	void pizzeria_in_region();
 	double distance(coordinate,coordinate);
 	void nearest_pizzeria(coordinate&, bool);

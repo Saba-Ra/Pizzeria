@@ -24,3 +24,17 @@ vector<coordinate>* hashTable::search(const string& name) {
 	}
 	throw runtime_error("\x1b[38;5;223m\t\t\t\t\tNo branches found for the given name.\x1b[38;5;220m");
 }
+
+void hashTable::Delete(const string& name)
+{
+	int index = hash(name);
+	int i = 0;
+	hashNode* target;
+	//while (i<table[index].size()) {
+	//	if (mainBranch.get_name() == name) {
+	//		/*table[index].erase(mainBranch);*/
+	//	}
+	//	i++;
+	//}
+	throw runtime_error("\x1b[38;5;223m\t\t\t\t\tNo branches found for the given name.\x1b[38;5;220m");
+}

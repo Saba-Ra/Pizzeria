@@ -75,8 +75,7 @@ void print_menu() {
 					cin >> A >> B >> C >> D;
 					regions.insert(name, regions.make_vec(A, B, C, D));
 					cout << "\n\t\t\t\t\t\x1b[38;5;223mRegion added successfully \x1b[38;5;220m\n";
-					Sleep(1000);
-					system("cls");
+					Sleep(3000);
 				}
 				else if (action == "Add-P") {
 					cin >> A;
@@ -92,7 +91,7 @@ void print_menu() {
 				}
 				else if (action == "Del-Br") {
 					cin >> A;
-					try { tree.Delete(A, table); }
+					try { tree.Delete(A, table, mostBranch); }
 					catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
 					Sleep(3000);
 				}
@@ -182,7 +181,7 @@ void help_loading() {
 		"\t\t\t\t\tList-P regionName\n"
 		"\t\t\t\t\tList-Brs namePizzeria\n"
 		"\t\t\t\t\tNear-P \n"
-		"\t\t\t\t\tNear-Br name \n"
+		"\t\t\t\t\tNear-Br mainBranch \n"
 		"\t\t\t\t\tAvail-P radius \n"
 		"\t\t\t\t\tMost-Brs\n\n";
 
@@ -226,7 +225,7 @@ void print_help() {
 		"\t\t\t\t\tList-P regionName\n"
 		"\t\t\t\t\tList-Brs namePizzeria\n"
 		"\t\t\t\t\tNear-P \n"
-		"\t\t\t\t\tNear-Br name \n"
+		"\t\t\t\t\tNear-Br mainBranch \n"
 		"\t\t\t\t\tAvail-P radius \n"
 		"\t\t\t\t\tMost-Brs\n\n";
 	//Undo
@@ -303,7 +302,7 @@ bool is_valid_command(string cmd) {
 		action == "Near-P" || action == "Near-Br" || action == "Avail-P" || action == "Most-Brs") {
 
 		// Check if additional arguments are provided
-		if (action == "Add-N" || action == "Add-P"  || action == "Avail-P" || action == "List-P" || action == "Near-Br"  || action == "Add-Br") {
+		if (action == "Add-N" || action == "Add-P" || action == "Avail-P" || action == "List-P" || action == "Near-Br" || action == "Add-Br") {
 			string arg;
 			if (!(ss >> arg)) {
 				return false;

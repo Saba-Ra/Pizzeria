@@ -40,7 +40,7 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 	}
 }
 
-void KDtree::Delete(coordinate point, hashTable& table) {
+void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>& mostBranch) {
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
 		});
@@ -58,13 +58,26 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 			all_nodes.erase(it);
 			buildTree(all_nodes);
 
-			cout << "\n\t\t\t\t\t\\x1b[38;5;223m" << deletedName << "\" in location " << point << " closed successfully";
+			cout << "\n\t\t\t\t\t\x1b[38;5;223m" << deletedName << " in location " << point << " closed successfully";
+
+			auto it = std::find_if(mostBranch.begin(), mostBranch.end(), [&](pair<string, int> node) {
+				return node.first == branchName;
+				});
+			if ((*it).second > 1)
+				(*it).second--;
+
+			else
+				mostBranch.remove(*it);
+
+
 		}
+
 	}
 	else {
 		throw("There is no pizzeria at this location!");
 	}
 }
+
 
 void KDtree::buildTree(vector<treeNode*>& all_tree_nodes) {
 	root = buildTreeRecursive(0, all_tree_nodes.size() - 1, 0, all_tree_nodes);
@@ -167,7 +180,7 @@ void KDtree::nearest_branch(string name, coordinate point, hashTable& table) {
 
 void KDtree::pizzeria_in_circle(const coordinate& A, float R) {
 	bool atLeastOne = false;
-	cout << "\n\t\t\t\t\t\x1b[38;5;223mPizzerias in this area:"<<endl;
+	cout << "\n\t\t\t\t\t\x1b[38;5;223mPizzerias in this area:" << endl;
 	pizzeria_traverse(A, R, root, &atLeastOne);
 	if (!atLeastOne) {
 		cout << "\n\t\t\t\t\t\x1b[38;5;223mThere is no pizzeria in this area!";
