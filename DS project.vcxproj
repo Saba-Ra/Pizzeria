@@ -127,18 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="chain.cpp" />
+    <ClCompile Include="chainNode.cpp" />
     <ClCompile Include="coordinate.cpp" />
     <ClCompile Include="hashNode.cpp" />
     <ClCompile Include="hashTable.cpp" />
+    <ClCompile Include="hashTablePlus.cpp" />
     <ClCompile Include="KDtree.cpp" />
     <ClCompile Include="neighborHood.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="treeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chain.h" />
+    <ClInclude Include="chainNode.h" />
     <ClInclude Include="coordinate.h" />
     <ClInclude Include="hashNode.h" />
     <ClInclude Include="hashTable.h" />
+    <ClInclude Include="hashTablePlus.h" />
     <ClInclude Include="KDtree.h" />
     <ClInclude Include="mainFunctions.h" />
     <ClInclude Include="neighborHood.h" />

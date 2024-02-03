@@ -58,7 +58,7 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 			all_nodes.erase(it);
 			buildTree(all_nodes);
 
-			cout << "\n\t\t\t\t\t\"" << deletedName << "\" in location " << point << " clossed successfully";
+			cout << "\n\t\t\t\t\t\"" << deletedName << "\" in location " << point << " closed successfully";
 		}
 	}
 	else {
