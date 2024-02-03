@@ -5,6 +5,7 @@
 #include"list"
 #include"conio.h"
 #include"neighborHood.h"
+#include <sstream>
 
 void gotoxy(int, int);
 
@@ -22,16 +23,20 @@ void give_max(list<pair<string, int>>&);
 
 void printAll(hashTable&, string);
 
+void process_input(string);
+
+bool is_valid_command(string);
+
 void print_menu() {
 
 	KDtree tree;
 	hashTable table;
 	list<pair<string, int>> mostBranch;
-	string input, name, mainName;
+	string user_input, name, Br_name;
 	coordinate A, B, C, D;
 	neighborHood regions;
-	bool flag = false;
 	float R;
+	bool flag = false;
 	while (1) {
 		if (flag == true) {
 			print_logo();
@@ -39,66 +44,89 @@ void print_menu() {
 		}
 		flag = true;
 		cout << "\t\t\t\t\t";
-		cout << "\x1b[38;5;220m";
-		cin >> input;
-		if (input == "Add-N") {
-			cin >> name;
-			cout << "\n\t\t\t\t\t\x1b[38;5;223mNow enter 4 coordinates :\x1b[38;5;220m\n";
-			cin >> A >> B >> C >> D;
-			regions.insert( name, regions.make_vec(A,B,C,D));
-			cout << "\n\t\t\t\t\t\x1b[38;5;223mRegion added successfully \x1b[38;5;220m\n";
-			Sleep(1000);
-			system("cls");
-		}
-		else if (input == "Add-P") {
-			cin >> name >> A;
-			tree.insert(name, name, A, table);
-			Sleep(2000);
-		}
-		else if (input == "Add-Br") {
-			cin >> mainName >> name >> A;
-			tree.insert(mainName, name, A, table);
-			update_list(mostBranch, mainName, 1);
-			Sleep(2000);
-		}
-		else if (input == "Del-Br") {
-			cin >> A;
-			try { tree.Delete(A, table); }
-			catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
-			Sleep(2000);
-		}
-		else if (input == "List-P") {
-			cin >> name;
-			regions.search(name,tree);
-		}
-		else if (input == "List-Brs") {
-			cin >> name;
-			printAll(table, name);
+		cout << "\x1b[38;5;220mEnter your commands separated by &&: ";
+		getline(cin, user_input);
+		process_input(user_input);
+		stringstream ss(user_input);
+		string command;
+		vector<string> commands;
+
+		// Split input by "&&"
+		while (getline(ss, command, '&')) {
+			if (command != "")
+				commands.push_back(command);
 		}
 
-
-		else if (input == "Near-P") {
-			cin >> A;
-			tree.nearest_pizzeria(A, true);
-			Sleep(4000);
+		// Validate each command
+		bool all_commands_valid = true;
+		for (auto& cmd : commands) {
+			if (!is_valid_command(cmd)) {
+				cout << "\n\t\t\t\t\t\x1b[38;5;223mInvalid command format! " << endl;
+				Sleep(3000);
+				all_commands_valid = false;
+				break;
+			}
 		}
-		else if (input == "Near-Br") {
-			cin >> name >> A;
-			try { tree.nearest_branch(name, A, table); }
-			catch (exception error) { cerr << error.what(); }
-			Sleep(2000);
-		}
-		else if (input == "Avail-P") {
-			cin >> R >> A;
-			tree.pizzeria_in_circle(A, R);
-			Sleep(5000);
-		}
-		else if (input == "Most-Brs") {
-			give_max(mostBranch);
-		}
-		else {
-			cout << "\t\t\t\t\tWrong input!\n";
-			Sleep(1000);
+		if (all_commands_valid) {
+			for (const auto& cmd : commands) {
+				stringstream cmd_ss(cmd);
+				string action, name;
+				cmd_ss >> action >> name;
+				cout << "\x1b[38;5;220m";
+				if (action == "Add-N") {
+					cout << "\n\t\t\t\t\t\x1b[38;5;223mNow enter 4 coordinates :\x1b[38;5;220m\n";
+					cin >> A >> B >> C >> D;
+					regions.insert(name, regions.make_vec(A, B, C, D));
+					cout << "\n\t\t\t\t\t\x1b[38;5;223mRegion added successfully \x1b[38;5;220m\n";
+					Sleep(1000);
+					system("cls");
+				}
+				else if (action == "Add-P") {
+					cin >> A;
+					tree.insert(name, name, A, table);
+					Sleep(2000);
+				}
+				else if (action == "Add-Br") {
+					cout << "\n\t\t\t\t\t\x1b[38;5;223mEnter this branch's name : ";
+					cin >> Br_name >> A;
+					tree.insert(name, Br_name, A, table);
+					update_list(mostBranch, name, 1);
+					Sleep(2000);
+				}
+				else if (action == "Del-Br") {
+					cin >> A;
+					try { tree.Delete(A, table); }
+					catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
+					Sleep(3000);
+				}
+				else if (action == "List-P") {
+					regions.search(name, tree);
+				}
+				else if (action == "List-Brs") {
+					printAll(table, name);
+				}
+				else if (action == "Near-P") {
+					cin >> A;
+					tree.nearest_pizzeria(A, true);
+					Sleep(4000);
+				}
+				else if (action == "Near-Br") {
+					cin >> A;
+					try { tree.nearest_branch(name, A, table); }
+					catch (exception error) { cerr << error.what(); }
+					Sleep(2000);
+				}
+				else if (action == "Avail-P") {
+					cin >> A;
+					stringstream(name) >> R;
+					tree.pizzeria_in_circle(A, R);
+					Sleep(5000);
+				}
+				else if (action == "Most-Brs") {
+					give_max(mostBranch);
+				}
+				cout << "\n";
+			}
 		}
 		system("cls");
 	}
@@ -220,6 +248,7 @@ void update_list(list<pair<string, int>>& mostBranch, const string& name, int va
 
 //there was no need to sort the list to extract the max
 //sort has been implemented in insert
+
 void give_max(list<pair<string, int>>& mostBranch) {
 	int max = INT_MIN;
 	list<string> mainBranches;
@@ -266,3 +295,46 @@ void printAll(hashTable& table, string name) {
 	}
 }
 
+void process_input(string input) {
+	stringstream ss(input);
+	string command;
+	vector<string> commands;
+
+	// Split input by "&&"
+	while (getline(ss, command, '&')) {
+		if (command != "")
+			commands.push_back(command);
+	}
+
+	// Validate each command
+	bool all_commands_valid = true;
+	for (auto& cmd : commands) {
+		if (!is_valid_command(cmd)) {
+			all_commands_valid = false;
+			break;
+		}
+	}
+}
+bool is_valid_command(string cmd) {
+
+	stringstream ss(cmd);
+	string action;
+	ss >> action;
+
+	if (action == "Add-N" || action == "Add-P" || action == "Add-Br" ||
+		action == "Del-Br" || action == "List-P" || action == "List-Brs" ||
+		action == "Near-P" || action == "Near-Br" || action == "Avail-P" || action == "Most-Brs") {
+
+		// Check if additional arguments are provided
+		if (action == "Add-N" || action == "Add-P" || action == "Near-P" || action == "Avail-P" || action == "List-P" || action == "Near-Br" || action == "Avail-P" || action == "Add-Br") {
+			string arg;
+			if (!(ss >> arg)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}

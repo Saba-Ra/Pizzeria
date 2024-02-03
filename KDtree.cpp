@@ -178,7 +178,7 @@ void KDtree::pizzeria_traverse(coordinate A, float R, treeNode* currentNode, boo
 	if (currentNode == nullptr)
 		return;
 	if (distance(A, currentNode->get_point()) <= R) {
-		cout << "\n\t\t\t\t\x1b[38;5;223m Name : " << currentNode->get_name() << "\tLocation : " << currentNode->get_point() << endl;
+		cout << "\n\t\t\t\t\t\x1b[38;5;223m Name : " << currentNode->get_name() << "\tLocation : " << currentNode->get_point() << endl;
 		*atLeastOne = true;
 	}
 	pizzeria_traverse(A, R, currentNode->set_get_left(), atLeastOne);
