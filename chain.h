@@ -4,7 +4,7 @@ class chain
 {
 	friend class hashTablePlus;
 private:
-	chainNode* last;
+	chainNode* first;
 public:
 	chain();
 	void insert_front(const chainNode&);

@@ -13,5 +13,6 @@ public:
 	void Delete(const chainNode&);
 	size_t multiplicationHash(int key)const;
 	chainNode* search(int key);
+	void Undo(int,int&);
 };
 
