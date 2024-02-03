@@ -69,7 +69,7 @@ void print_menu() {
 		}
 		else if (input == "List-P") {
 			cin >> name;
-			tree.pizzeria_in_region();
+			regions.search(name,tree);
 		}
 		else if (input == "List-Brs") {
 			cin >> name;

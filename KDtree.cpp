@@ -92,9 +92,6 @@ treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth, vector<treeN
 	return newNode;
 }
 
-void KDtree::pizzeria_in_region() {
-
-}
 
 double KDtree::distance(coordinate node, coordinate target) {
 	double diff_x = node.set_get_xy()[0] - target.set_get_xy()[0];
@@ -136,6 +133,8 @@ void KDtree::nearest_pizzeria(coordinate& target, bool flag) {
 
 	if (flag)
 		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tName : " << foundNode->get_name() << endl << "\t\t\t\t\tLocation : " << foundNode->get_point() << "\x1b[38;5;208m";
+
+
 
 	else
 		cout << "\n\x1b[38;5;223m\t\t\t\t\tNearest Pizzeria =>\n" << "\t\t\t\t\tLocation : " << foundNode->get_point() << "\x1b[38;5;208m";
