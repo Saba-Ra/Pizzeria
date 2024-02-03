@@ -276,11 +276,11 @@ void give_max(list<pair<string, int>>& mostBranch) {
 
 void printAll(hashTable& table, string name) {
 	try {
-		vector<coordinate>* vec = table.search(name);
+		vector<pair<coordinate, string>>* vec = table.search(name);
 		int j = 1;
 		for (auto& i : *vec) {
-			cout << "\n\t\t\t\t\t\x1b[38;5;223mX" << j << " : " << i.set_get_xy()[0] << endl;
-			cout << "\t\t\t\t\tY" << j << " : " << i.set_get_xy()[1] << endl;
+			cout << "\n\t\t\t\t\t\x1b[38;5;223mX" << j << " : " << i.first.set_get_xy()[0] << endl;
+			cout << "\t\t\t\t\tY" << j << " : " << i.first.set_get_xy()[1] << endl;
 			j++;
 		}
 		cout << "\n\t\t\t\t\tPress any key to go back\n\x1b[38;5;220m";

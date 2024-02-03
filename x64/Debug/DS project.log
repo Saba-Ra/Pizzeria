@@ -1,8 +1,15 @@
-﻿  hashTablePlus.cpp
-D:\DS final project\Pizzeria\hashTablePlus.cpp(55,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DS final project\Pizzeria\hashTablePlus.cpp(56,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DS final project\Pizzeria\hashTablePlus.cpp(65,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DS final project\Pizzeria\hashTablePlus.cpp(66,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+﻿  KDtree.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(90,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(225,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(226,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Source.cpp
+  chain.cpp
+  chainNode.cpp
+  hashTablePlus.cpp
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(55,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(56,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(65,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(66,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   neighborHood.cpp
   Generating Code...
-  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+  DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe

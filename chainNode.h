@@ -11,6 +11,7 @@ private:
 public:
 	chainNode();
 	chainNode(pair<int, string>, chainNode*);
+	chainNode(pair<int, string>);
 	chainNode(const chainNode&);
 	bool operator==(const chainNode&) const ;
 	int get_key()const;

@@ -11,6 +11,12 @@ chainNode::chainNode(pair<int, string> newData, chainNode* newNext) {
 	this->next = newNext;
 }
 
+chainNode::chainNode(pair<int, string> newData)
+{
+	this->data = newData;
+	this->next = NULL;
+}
+
 chainNode::chainNode(const chainNode& secondNode) {
 	this->data = secondNode.data;
 	this->next = secondNode.next;

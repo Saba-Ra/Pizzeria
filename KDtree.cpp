@@ -35,7 +35,12 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 			table.insert(newHashNode);
 		}
 		coordinate newBranch(point.set_get_xy());
-		table.search(mainBranch)->push_back(newBranch);
+		table.search(mainBranch)->push_back(make_pair(newBranch, name));
+
+		//string command = "Add-P " + to_string(point.set_get_xy()[0])+ " "+ to_string(point.set_get_xy()[1]);
+		//chainNode newCommandNode(make_pair(orderNumber, command));
+		//commandsTable.insert(newCommandNode);
+		
 		cout << "\n\t\t\t\t\t\x1b[38;5;223mYour pizzeria has been successfully added!\n";
 	}
 }
@@ -50,8 +55,10 @@ void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>&
 		}
 		else {
 			string branchName = (*it)->get_mainBranch();
-			vector<coordinate>* branches = table.search(branchName);
-			auto it2 = std::find(branches->begin(), branches->end(), point);
+			vector<pair<coordinate, string>>* branches = table.search(branchName);
+			auto it2 = std::find_if(branches->begin(), branches->end(), [&](pair<coordinate, string> branch) {
+				return branch.first == point;
+				});
 			string deletedName = (*it)->get_name();
 			branches->erase(it2);
 
@@ -156,12 +163,13 @@ void KDtree::nearest_pizzeria(coordinate& target, bool flag) {
 }
 
 void KDtree::nearest_branch(string name, coordinate point, hashTable& table) {
-	vector<coordinate> branches = *(table.search(name));
+	vector<pair<coordinate, string>> branches = *(table.search(name));
 	vector<treeNode*> all_branch_nodes;
 	for (auto i = branches.begin(); i != branches.end(); i++) {
 		treeNode* newNode = new treeNode();
-		newNode->get_point().set_get_xy()[0] = (*i).set_get_xy()[0];
-		newNode->get_point().set_get_xy()[1] = (*i).set_get_xy()[1];
+		newNode->get_point().set_get_xy()[0] = (*i).first.set_get_xy()[0];
+		newNode->get_point().set_get_xy()[1] = (*i).first.set_get_xy()[1];
+		newNode->get_name() = (*i).second;
 		all_branch_nodes.push_back(newNode);
 	}
 
