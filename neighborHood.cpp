@@ -84,3 +84,15 @@ bool neighborHood::isInsideRectangle(coordinate& point, vector<coordinate>& vert
 		return false;
 }
 
+void neighborHood::Delete_region(string regionName) {
+	// Iterate through the regions vector and remove the region with the matching name and rectangle coordinates
+	for (auto it = regions.begin(); it != regions.end(); ++it) {
+		if (it->first == regionName) {
+			regions.erase(it);
+			cout << "\n\t\t\t\t\t\x1b[38;5;223mRegion " << regionName << " deleted successfully." << endl;
+			Sleep(3000);
+			return;
+		}
+
+	}
+}

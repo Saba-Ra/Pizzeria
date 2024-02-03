@@ -1,4 +1,6 @@
 #include "hashTablePlus.h"
+#include "neighborHood.h"
+#include"KDtree.h"
 #include <sstream>
 hashTablePlus::hashTablePlus() :size(97) {}
 
@@ -33,24 +35,36 @@ chainNode* hashTablePlus::search(int key) {
 }
 
 
-void hashTablePlus::Undo(int num_levels, int& current_level) {
+void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regions, hashTable& table, KDtree& tree, hashTablePlus&commandsTable) {
 	for (int i = current_level; i > num_levels; i--) {
 		chainNode* temp = search(i);
 		stringstream cmd_ss(temp->get_value());
-		string action, name, mainName, x1, y1, x2, y2, x3, y3, x4, y4;
+		string action, name, mainName, x1, y1;
+		int x, y;
 		cmd_ss >> action;
 		if (action == "Add-N") {
-			cmd_ss >> action >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
 			//delete region
+			cmd_ss >> name;
+			regions.Delete_region(name);
 		}
-		else if (action == "Add-P"|| action == "Add-Br") {
+		else if (action == "Add-P" || action == "Add-Br") {
 			cmd_ss >> x1 >> y1;
-			//delete mainBr
+			coordinate tmp;
+			stringstream(x1) >> x;
+			stringstream(y1) >> y;
+			tmp.set_get_xy()[0] = x;
+			tmp.set_get_xy()[1] = y;
+			//delete mainBr or branch
 		}
 
 		else if (action == "Del-Br") {
-			cmd_ss>>name >> x1 >> y1;
-			//add Br
+			cmd_ss >>mainName >>name >> x1 >> y1;
+			coordinate tmp;
+			stringstream(x1) >> x;
+			stringstream(y1) >> y;
+			tmp.set_get_xy()[0] = x;
+			tmp.set_get_xy()[1] = y;
+			tree.insert(mainName, name, tmp,table, commandsTable);
 		}
 		Delete(*temp);
 	}

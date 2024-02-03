@@ -3,6 +3,7 @@
 #include"vector"
 #include"KDtree.h"
 #include"windows.h"
+
 class neighborHood
 {
 private:
@@ -16,5 +17,6 @@ public:
 	void traverseTree(treeNode*, vector<coordinate>&,bool&);
 	vector<coordinate> make_vec(coordinate, coordinate, coordinate, coordinate);
 	bool isInsideRectangle(coordinate&, vector<coordinate>&);
+	void Delete_region(string );
 };
 
