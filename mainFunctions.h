@@ -23,8 +23,6 @@ void give_max(list<pair<string, int>>&);
 
 void printAll(hashTable&, string);
 
-void process_input(string);
-
 bool is_valid_command(string);
 
 void print_menu() {
@@ -46,7 +44,6 @@ void print_menu() {
 		cout << "\t\t\t\t\t";
 		cout << "\x1b[38;5;220mEnter your commands separated by &&: ";
 		getline(cin, user_input);
-		process_input(user_input);
 		stringstream ss(user_input);
 		string command;
 		vector<string> commands;
@@ -295,26 +292,6 @@ void printAll(hashTable& table, string name) {
 	}
 }
 
-void process_input(string input) {
-	stringstream ss(input);
-	string command;
-	vector<string> commands;
-
-	// Split input by "&&"
-	while (getline(ss, command, '&')) {
-		if (command != "")
-			commands.push_back(command);
-	}
-
-	// Validate each command
-	bool all_commands_valid = true;
-	for (auto& cmd : commands) {
-		if (!is_valid_command(cmd)) {
-			all_commands_valid = false;
-			break;
-		}
-	}
-}
 bool is_valid_command(string cmd) {
 
 	stringstream ss(cmd);
@@ -326,7 +303,7 @@ bool is_valid_command(string cmd) {
 		action == "Near-P" || action == "Near-Br" || action == "Avail-P" || action == "Most-Brs") {
 
 		// Check if additional arguments are provided
-		if (action == "Add-N" || action == "Add-P" || action == "Near-P" || action == "Avail-P" || action == "List-P" || action == "Near-Br" || action == "Avail-P" || action == "Add-Br") {
+		if (action == "Add-N" || action == "Add-P"  || action == "Avail-P" || action == "List-P" || action == "Near-Br"  || action == "Add-Br") {
 			string arg;
 			if (!(ss >> arg)) {
 				return false;
