@@ -6,6 +6,7 @@
 #include"conio.h"
 #include"neighborHood.h"
 #include <sstream>
+#include "hashTablePlus.h"
 
 void gotoxy(int, int);
 
@@ -29,6 +30,7 @@ void print_menu() {
 
 	KDtree tree;
 	hashTable table;
+	hashTablePlus commandsTable;
 	list<pair<string, int>> mostBranch;
 	string user_input, name, Br_name;
 	coordinate A, B, C, D;
@@ -79,19 +81,19 @@ void print_menu() {
 				}
 				else if (action == "Add-P") {
 					cin >> A;
-					tree.insert(name, name, A, table);
+					tree.insert(name, name, A, table, commandsTable);
 					Sleep(2000);
 				}
 				else if (action == "Add-Br") {
 					cout << "\n\t\t\t\t\t\x1b[38;5;223mEnter this branch's name : ";
 					cin >> Br_name >> A;
-					tree.insert(name, Br_name, A, table);
+					tree.insert(name, Br_name, A, table, commandsTable);
 					update_list(mostBranch, name, 1);
 					Sleep(2000);
 				}
 				else if (action == "Del-Br") {
 					cin >> A;
-					try { tree.Delete(A, table, mostBranch); }
+					try { tree.Delete(A, table, mostBranch, commandsTable); }
 					catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
 					Sleep(3000);
 				}

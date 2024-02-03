@@ -1,5 +1,6 @@
 #pragma once
 #include "chain.h"
+#include <vector>
 
 class hashTablePlus
 {

@@ -2,10 +2,11 @@
 
 chainNode::chainNode() {
 	this->data.first = 0;
+	this->data.second = "";
 	this->next = nullptr;
 }
 
-chainNode::chainNode(pair<int, vector<string>> newData, chainNode* newNext) {
+chainNode::chainNode(pair<int, string> newData, chainNode* newNext) {
 	this->data = newData;
 	this->next = newNext;
 }
@@ -21,6 +22,6 @@ bool chainNode::operator==(const chainNode& second) const {
 
 int chainNode::get_key()const { return this->data.first; }
 
-vector<string> chainNode::get_value()const { return this->data.second; }
+string chainNode::get_value()const { return this->data.second; }
 
 chainNode* chainNode::get_next()const { return this->next; }

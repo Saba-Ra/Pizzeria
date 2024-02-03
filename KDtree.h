@@ -4,6 +4,7 @@
 #include <limits>
 #include <list>
 #include"hashTable.h"
+#include "hashTablePlus.h"
 using namespace std;
 class KDtree
 {
@@ -13,8 +14,8 @@ private:
 public:
 	KDtree();
 	treeNode* getRoot();
-	void insert(string,string, coordinate, hashTable&);
-	void Delete(coordinate, hashTable&, list<pair<string, int>>&);
+	void insert(string,string, coordinate, hashTable&, hashTablePlus&);
+	void Delete(coordinate, hashTable&, list<pair<string, int>>&, hashTablePlus&);
 	void pizzeria_in_region();
 	double distance(coordinate,coordinate);
 	void nearest_pizzeria(coordinate&, bool);

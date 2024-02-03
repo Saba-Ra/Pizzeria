@@ -6,13 +6,18 @@ chain::chain() {
 
 void chain::insert_front(const chainNode& Node) {
 	chainNode* newNode = new chainNode(Node);
-	last->next = newNode;
-	last = newNode;
+	if (!last) {
+		last = newNode;
+	}
+	else {
+		last->next = newNode;
+		last = newNode;
+	}
 }
 
 void chain::delete_node(const chainNode& target) {
 	chainNode* prev = nullptr;
-	chainNode* curr = last->next;
+	chainNode* curr = last->next; //first noad
 	while (!(*curr == target)) {
 		prev = curr;
 		curr = curr->next;

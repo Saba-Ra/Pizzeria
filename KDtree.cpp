@@ -8,7 +8,7 @@ KDtree::KDtree() {
 treeNode* KDtree::getRoot() { return this->root; }
 
 
-void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table) {
+void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table, hashTablePlus& commandsTable) {
 	treeNode* newNode = new treeNode(name, point, mainBranch, NULL, NULL);
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
@@ -40,7 +40,7 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 	}
 }
 
-void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>& mostBranch) {
+void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>& mostBranch, hashTablePlus& commandsTable) {
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
 		});

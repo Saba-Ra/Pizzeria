@@ -8,7 +8,7 @@ void hashTablePlus::insert(const chainNode& newNode) {
 }
 
 void hashTablePlus::Delete(const chainNode& target)
-{ 
+{
 	size_t index = multiplicationHash(target.get_key());
 	table[index].delete_node(target);
 }
@@ -22,9 +22,10 @@ size_t hashTablePlus::multiplicationHash(int key)const {
 
 chainNode* hashTablePlus::search(int key) {
 	size_t index = multiplicationHash(key);
-	for (chainNode* it = table[index].last->get_next(); it != table[index].last; it++) {
-		if (it->get_key() ==key ) {
-			return it;
+	chainNode* temp = table[index].last;
+	while (temp != NULL) {
+		if (temp->get_key() == key) {
+			return temp;
 		}
 	}
 	throw runtime_error("\x1b[38;5;223m\t\t\t\t\tNo command found for the given input.\x1b[38;5;220m"); // Key not found
