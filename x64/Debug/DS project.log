@@ -1,3 +1,4 @@
+
 ﻿  KDtree.cpp
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(90,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(225,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
@@ -13,3 +14,12 @@ C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(66,26): warn
   neighborHood.cpp
   Generating Code...
   DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe
+
+﻿  hashTablePlus.cpp
+D:\DS final project\Pizzeria\hashTablePlus.cpp(57,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(58,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(67,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(68,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(73,28): warning C4101: 'e': unreferenced local variable
+  DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe
+
