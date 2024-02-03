@@ -1,5 +1,6 @@
 #pragma once
 #include "chain.h"
+
 class hashTablePlus
 {
 private:
@@ -7,9 +8,9 @@ private:
 	vector<chain> table;
 public:
 	hashTablePlus();
-
 	void insert(const chainNode&);
-
-	int hash(const string&);
+	void Delete(const chainNode&);
+	size_t multiplicationHash(int key)const;
+	chainNode* search(int key);
 };
 

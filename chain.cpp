@@ -1,17 +1,18 @@
 #include "chain.h"
 
 chain::chain() {
-	head = nullptr;
+	last = nullptr;
 }
 
-void chain::insert_front(chainNode* newNode) {
-	newNode->next = head;
-	head = newNode;
+void chain::insert_front(const chainNode& Node) {
+	chainNode* newNode = new chainNode(Node);
+	last->next = newNode;
+	last = newNode;
 }
 
 void chain::delete_node(const chainNode& target) {
 	chainNode* prev = nullptr;
-	chainNode* curr = head;
+	chainNode* curr = last->next;
 	while (!(*curr == target)) {
 		prev = curr;
 		curr = curr->next;

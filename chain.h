@@ -4,10 +4,10 @@ class chain
 {
 	friend class hashTablePlus;
 private:
-	chainNode* head;
+	chainNode* last;
 public:
 	chain();
-	void insert_front(chainNode*);
+	void insert_front(const chainNode&);
 	void delete_node(const chainNode&);
 };
 

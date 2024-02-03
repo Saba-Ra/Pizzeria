@@ -36,7 +36,7 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 		}
 		coordinate newBranch(point.set_get_xy());
 		table.search(mainBranch)->push_back(newBranch);
-		cout << "\n\t\t\t\t\tYour pizzeria has been successfully added!\n";
+		cout << "\n\t\t\t\t\t\x1b[38;5;223mYour pizzeria has been successfully added!\n";
 	}
 }
 
@@ -58,7 +58,7 @@ void KDtree::Delete(coordinate point, hashTable& table) {
 			all_nodes.erase(it);
 			buildTree(all_nodes);
 
-			cout << "\n\t\t\t\t\t\"" << deletedName << "\" in location " << point << " closed successfully";
+			cout << "\n\t\t\t\t\t\\x1b[38;5;223m" << deletedName << "\" in location " << point << " closed successfully";
 		}
 	}
 	else {
