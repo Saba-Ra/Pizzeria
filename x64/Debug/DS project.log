@@ -1,8 +1,7 @@
 ﻿  hashTablePlus.cpp
-D:\DS final project\Pizzeria\hashTablePlus.cpp(55,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DS final project\Pizzeria\hashTablePlus.cpp(56,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DS final project\Pizzeria\hashTablePlus.cpp(65,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\DS final project\Pizzeria\hashTablePlus.cpp(66,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  neighborHood.cpp
-  Generating Code...
+D:\DS final project\Pizzeria\hashTablePlus.cpp(57,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(58,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(67,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(68,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\DS final project\Pizzeria\hashTablePlus.cpp(73,28): warning C4101: 'e': unreferenced local variable
   DS project.vcxproj -> D:\DS final project\Pizzeria\x64\Debug\DS project.exe

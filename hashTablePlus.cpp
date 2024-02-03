@@ -35,38 +35,49 @@ chainNode* hashTablePlus::search(int key) {
 }
 
 
-void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regions, hashTable& table, KDtree& tree, hashTablePlus&commandsTable) {
-	for (int i = current_level; i > num_levels; i--) {
-		chainNode* temp = search(i);
-		stringstream cmd_ss(temp->get_value());
-		string action, name, mainName, x1, y1;
-		int x, y;
-		cmd_ss >> action;
-		if (action == "Add-N") {
-			//delete region
-			cmd_ss >> name;
-			regions.Delete_region(name);
-		}
-		else if (action == "Add-P" || action == "Add-Br") {
-			cmd_ss >> x1 >> y1;
-			coordinate tmp;
-			stringstream(x1) >> x;
-			stringstream(y1) >> y;
-			tmp.set_get_xy()[0] = x;
-			tmp.set_get_xy()[1] = y;
-			//delete mainBr or branch
-		}
+void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regions, hashTable& table, KDtree& tree, hashTablePlus& commandsTable) {
+	if (current_level != 0 && num_levels <= current_level) {
+		for (int i = current_level; i > num_levels; i--) {
+			try {
+				chainNode* temp = search(i);
+				stringstream cmd_ss(temp->get_value());
+				string action, name, mainName, x1, y1;
+				int x, y;
+				cmd_ss >> action;
+				if (action == "Add-N") {
+					//delete region
+					cmd_ss >> name;
+					regions.Delete_region(name);
+				}
+				else if (action == "Add-P" || action == "Add-Br") {
+					cmd_ss >> x1 >> y1;
+					coordinate tmp;
+					stringstream(x1) >> x;
+					stringstream(y1) >> y;
+					tmp.set_get_xy()[0] = x;
+					tmp.set_get_xy()[1] = y;
+					//delete mainBr or branch
+				}
 
-		else if (action == "Del-Br") {
-			cmd_ss >>mainName >>name >> x1 >> y1;
-			coordinate tmp;
-			stringstream(x1) >> x;
-			stringstream(y1) >> y;
-			tmp.set_get_xy()[0] = x;
-			tmp.set_get_xy()[1] = y;
-			tree.insert(mainName, name, tmp,table, commandsTable);
+				else if (action == "Del-Br") {
+					cmd_ss >> mainName >> name >> x1 >> y1;
+					coordinate tmp;
+					stringstream(x1) >> x;
+					stringstream(y1) >> y;
+					tmp.set_get_xy()[0] = x;
+					tmp.set_get_xy()[1] = y;
+					tree.insert(mainName, name, tmp, table, commandsTable);
+				}
+				Delete(*temp);
+			}
+			catch (const exception& e) {}
 		}
-		Delete(*temp);
+		current_level = num_levels;
 	}
-	current_level = num_levels;
+	else if (current_level != 0 && num_levels > current_level) {
+		cout << "\x1b[38;5;223m\t\t\t\t\tAre you trying to go to a  time that doesn't exist?! 😀";
+	}
+	else {
+		cout << "\x1b[38;5;223m\t\t\t\t\tNo commands yet!";
+	}
 }

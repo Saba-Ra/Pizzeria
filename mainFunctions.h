@@ -27,7 +27,7 @@ void printAll(hashTable&, string);
 bool is_valid_command(string);
 
 void print_menu() {
-
+	int currentLevel = 0;
 	KDtree tree;
 	hashTable table;
 	hashTablePlus commandsTable;
@@ -82,6 +82,7 @@ void print_menu() {
 				else if (action == "Add-P") {
 					cin >> A;
 					tree.insert(name, name, A, table, commandsTable);
+					currentLevel++;
 					Sleep(2000);
 				}
 				else if (action == "Add-Br") {
@@ -89,39 +90,54 @@ void print_menu() {
 					cin >> Br_name >> A;
 					tree.insert(name, Br_name, A, table, commandsTable);
 					update_list(mostBranch, name, 1);
+					currentLevel++;
 					Sleep(2000);
 				}
 				else if (action == "Del-Br") {
 					cin >> A;
 					try { tree.Delete(A, table, mostBranch, commandsTable); }
 					catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
+					currentLevel++;
 					Sleep(3000);
 				}
 				else if (action == "List-P") {
 					regions.search(name, tree);
+					currentLevel++;
 				}
 				else if (action == "List-Brs") {
 					printAll(table, name);
+					currentLevel++;
 				}
 				else if (action == "Near-P") {
 					cin >> A;
 					tree.nearest_pizzeria(A, true);
+					currentLevel++;
 					Sleep(4000);
 				}
 				else if (action == "Near-Br") {
 					cin >> A;
 					try { tree.nearest_branch(name, A, table); }
 					catch (exception error) { cerr << error.what(); }
+					currentLevel++;
 					Sleep(2000);
 				}
 				else if (action == "Avail-P") {
 					cin >> A;
 					stringstream(name) >> R;
 					tree.pizzeria_in_circle(A, R);
+					currentLevel++;
 					Sleep(5000);
 				}
 				else if (action == "Most-Brs") {
 					give_max(mostBranch);
+					currentLevel++;
+				}
+				else if (action == "Undo") {
+					int num;
+					cout << "\n\t\t\t\t\t\x1b[38;5;223mEnter how many levels you want to go back: ";
+					cin >> num;
+					commandsTable.Undo(num, currentLevel,regions,table,tree,commandsTable);
+					Sleep(2000);
 				}
 				cout << "\n";
 			}
@@ -173,7 +189,7 @@ void logo_loading() {
 void help_loading() {
 
 	//Help menu
-	std::string helpMenu =
+	string helpMenu =
 		"\x1b[38;5;208m"
 		"\t\t\t\t\t\t--------help---------\n"
 		"\t\t\t\t\tAdd-N name\n"
@@ -185,7 +201,8 @@ void help_loading() {
 		"\t\t\t\t\tNear-P \n"
 		"\t\t\t\t\tNear-Br mainBranch \n"
 		"\t\t\t\t\tAvail-P radius \n"
-		"\t\t\t\t\tMost-Brs\n\n";
+		"\t\t\t\t\tMost-Brs\n"
+		"\t\t\t\t\tUndo\n\n";
 
 	//Load menu line by line
 	for (int i = 0; i < helpMenu.size(); ++i) {
@@ -229,8 +246,8 @@ void print_help() {
 		"\t\t\t\t\tNear-P \n"
 		"\t\t\t\t\tNear-Br mainBranch \n"
 		"\t\t\t\t\tAvail-P radius \n"
-		"\t\t\t\t\tMost-Brs\n\n";
-	//Undo
+		"\t\t\t\t\tMost-Brs\n"
+		"\t\t\t\t\tUndo\n\n";
 }
 
 void update_list(list<pair<string, int>>& mostBranch, const string& name, int value) {
@@ -301,7 +318,7 @@ bool is_valid_command(string cmd) {
 
 	if (action == "Add-N" || action == "Add-P" || action == "Add-Br" ||
 		action == "Del-Br" || action == "List-P" || action == "List-Brs" ||
-		action == "Near-P" || action == "Near-Br" || action == "Avail-P" || action == "Most-Brs") {
+		action == "Near-P" || action == "Near-Br" || action == "Avail-P" || action == "Most-Brs" || action == "Undo") {
 
 		// Check if additional arguments are provided
 		if (action == "Add-N" || action == "Add-P" || action == "Avail-P" || action == "List-P" || action == "Near-Br" || action == "Add-Br") {
