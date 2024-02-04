@@ -12,7 +12,7 @@ public:
 	hashNode();
 	hashNode(string name, const coordinate&);
 	hashNode(string name,const coordinate&, const vector<pair<coordinate, string>>&);
-	string get_name();
+	string get_name()const;
 	vector<pair<coordinate, string>>& get_branches();
 };
 

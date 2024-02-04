@@ -81,21 +81,21 @@ void print_menu() {
 				}
 				else if (action == "Add-P") {
 					cin >> A;
-					tree.insert(name, name, A, table, commandsTable);
+					tree.insert(name, name, A, table, commandsTable, currentLevel, true);
 					currentLevel++;
 					Sleep(2000);
 				}
 				else if (action == "Add-Br") {
 					cout << "\n\t\t\t\t\t\x1b[38;5;223mEnter this branch's name : ";
 					cin >> Br_name >> A;
-					tree.insert(name, Br_name, A, table, commandsTable);
+					tree.insert(name, Br_name, A, table, commandsTable, currentLevel, true);
 					update_list(mostBranch, name, 1);
 					currentLevel++;
 					Sleep(2000);
 				}
 				else if (action == "Del-Br") {
 					cin >> A;
-					try { tree.Delete(A, table, mostBranch, commandsTable); }
+					try { tree.Delete(A, table, mostBranch, commandsTable, currentLevel, false, true); }
 					catch (const char* error) { cout << "\n\t\t\t\t\t" << error; }
 					currentLevel++;
 					Sleep(3000);
@@ -136,7 +136,7 @@ void print_menu() {
 					int num;
 					cout << "\n\t\t\t\t\t\x1b[38;5;223mEnter how many levels you want to go back: ";
 					cin >> num;
-					commandsTable.Undo(num, currentLevel,regions,table,tree,commandsTable);
+					commandsTable.Undo(num, currentLevel,regions,table,tree,commandsTable, mostBranch);
 					Sleep(2000);
 				}
 				cout << "\n";

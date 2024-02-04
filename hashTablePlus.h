@@ -2,6 +2,7 @@
 #include "chain.h"
 #include"hashTable.h"
 #include <vector>
+#include<list>
 
 class KDtree;
 class neighborHood;
@@ -16,6 +17,6 @@ public:
 	void Delete(const chainNode&);
 	size_t multiplicationHash(int key)const;
 	chainNode* search(int key);
-	void Undo(int, int&, neighborHood& , hashTable& , KDtree&, hashTablePlus&);
+	void Undo(int, int&, neighborHood& , hashTable& , KDtree&, hashTablePlus&, list<pair<string, int>>&);
 };
 

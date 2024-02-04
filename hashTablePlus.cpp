@@ -35,7 +35,7 @@ chainNode* hashTablePlus::search(int key) {
 }
 
 
-void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regions, hashTable& table, KDtree& tree, hashTablePlus& commandsTable) {
+void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regions, hashTable& table, KDtree& tree, hashTablePlus& commandsTable, list<pair<string, int>>& mostBranch) {
 	if (current_level != 0 && num_levels <= current_level) {
 		for (int i = current_level; i > num_levels; i--) {
 			try {
@@ -56,7 +56,19 @@ void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regio
 					stringstream(y1) >> y;
 					tmp.set_get_xy()[0] = x;
 					tmp.set_get_xy()[1] = y;
-					//delete mainBr or branch
+					//delete mainBr or branch:
+					if (action == "Add-P") {
+						vector<treeNode*> all_nodes = tree.set_get_allNodes();
+						auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
+							return node->get_point() == tmp;
+							});
+						all_nodes.erase(it);
+						tree.buildTree(all_nodes);
+						table.Delete((*it)->get_name());
+					}
+					else if (action == "Add-Br") {
+						tree.Delete(tmp, table, mostBranch, commandsTable, i, true, false);
+					}
 				}
 
 				else if (action == "Del-Br") {
@@ -66,7 +78,7 @@ void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regio
 					stringstream(y1) >> y;
 					tmp.set_get_xy()[0] = x;
 					tmp.set_get_xy()[1] = y;
-					tree.insert(mainName, name, tmp, table, commandsTable);
+					tree.insert(mainName, name, tmp, table, commandsTable, i, false);
 				}
 				Delete(*temp);
 			}

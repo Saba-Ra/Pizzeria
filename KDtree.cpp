@@ -8,7 +8,7 @@ KDtree::KDtree() {
 treeNode* KDtree::getRoot() { return this->root; }
 
 
-void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table, hashTablePlus& commandsTable) {
+void KDtree::insert(string mainBranch, string name, coordinate point, hashTable& table, hashTablePlus& commandsTable, int orderNumber, bool updateCommandsTable) {
 	treeNode* newNode = new treeNode(name, point, mainBranch, NULL, NULL);
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
@@ -30,22 +30,29 @@ void KDtree::insert(string mainBranch, string name, coordinate point, hashTable&
 		all_nodes.push_back(newNode);
 		buildTree(all_nodes);
 
+		string command;
 		if (mainBranch == name) { //which means this is a main branch and should be added to the hashtable
 			hashNode newHashNode(name, point);
 			table.insert(newHashNode);
+			command = "Add-P " + to_string(point.set_get_xy()[0]) + " " + to_string(point.set_get_xy()[1]);
 		}
+		else {
+			command = "Add-Br " + to_string(point.set_get_xy()[0]) + " " + to_string(point.set_get_xy()[1]);
+		}
+
 		coordinate newBranch(point.set_get_xy());
 		table.search(mainBranch)->push_back(make_pair(newBranch, name));
 
-		//string command = "Add-P " + to_string(point.set_get_xy()[0])+ " "+ to_string(point.set_get_xy()[1]);
-		//chainNode newCommandNode(make_pair(orderNumber, command));
-		//commandsTable.insert(newCommandNode);
-		
+		if (updateCommandsTable) {
+			chainNode newCommandNode(make_pair(orderNumber, command));
+			commandsTable.insert(newCommandNode);
+		}
+
 		cout << "\n\t\t\t\t\t\x1b[38;5;223mYour pizzeria has been successfully added!\n";
 	}
 }
 
-void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>& mostBranch, hashTablePlus& commandsTable) {
+void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>& mostBranch, hashTablePlus& commandsTable, int orderNumber, bool deleteMainBranchAvailable, bool updateCommandsTable) {
 	auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 		return node->get_point() == point;
 		});
@@ -65,6 +72,12 @@ void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>&
 			all_nodes.erase(it);
 			buildTree(all_nodes);
 
+			if (updateCommandsTable) {
+				string command = "Del-Br " + branchName + " " + deletedName + " " + to_string(point.set_get_xy()[0]) + " " + to_string(point.set_get_xy()[1]);
+				chainNode newCommandNode(make_pair(orderNumber, command));
+				commandsTable.insert(newCommandNode);
+			}
+
 			cout << "\n\t\t\t\t\t\x1b[38;5;223m" << deletedName << " in location " << point << " closed successfully";
 
 			auto it = std::find_if(mostBranch.begin(), mostBranch.end(), [&](pair<string, int> node) {
@@ -78,7 +91,6 @@ void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>&
 
 
 		}
-
 	}
 	else {
 		throw("There is no pizzeria at this location!");
@@ -88,6 +100,11 @@ void KDtree::Delete(coordinate point, hashTable& table, list<pair<string, int>>&
 
 void KDtree::buildTree(vector<treeNode*>& all_tree_nodes) {
 	root = buildTreeRecursive(0, all_tree_nodes.size() - 1, 0, all_tree_nodes);
+}
+
+vector<treeNode*>& KDtree::set_get_allNodes()
+{
+	return all_nodes;
 }
 
 treeNode* KDtree::buildTreeRecursive(int begin, int end, int depth, vector<treeNode*>& all_tree_nodes) {

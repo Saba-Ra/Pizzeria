@@ -9,5 +9,5 @@ hashNode::hashNode(string name, const coordinate& point, const vector <pair<coor
 	this->point = point;
 	this->branches = branches;
 }
-string hashNode::get_name() { return this->name; }
+string hashNode::get_name()const { return this->name; }
 vector<pair<coordinate, string>>& hashNode::get_branches() { return this->branches; }

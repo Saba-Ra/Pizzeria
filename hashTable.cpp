@@ -28,13 +28,16 @@ vector<pair<coordinate, string>>* hashTable::search(const string& name) {
 void hashTable::Delete(const string& name)
 {
 	int index = hash(name);
-	int i = 0;
-	hashNode* target;
-	//while (i<table[index].size()) {
-	//	if (mainBranch.get_name() == name) {
-	//		/*table[index].erase(mainBranch);*/
-	//	}
-	//	i++;
-	//}
-	throw runtime_error("\x1b[38;5;223m\t\t\t\t\tNo branches found for the given name.\x1b[38;5;220m");
+
+	auto it = std::find_if(table[index].begin(), table[index].end(), [&](const hashNode& node) {
+		return node.get_name() == name;
+		});
+
+	if (it != table[index].end()) {
+		// Node found, erase it
+		table[index].erase(it);
+	}
+	else {
+		throw runtime_error("No entry found for the given name to delete.");
+	}
 }
