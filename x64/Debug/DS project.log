@@ -1,13 +1,7 @@
 ﻿  hashTablePlus.cpp
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(57,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(58,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(79,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(80,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(85,28): warning C4101: 'e': unreferenced local variable
-  KDtree.cpp
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(102,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(242,79): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\KDtree.cpp(243,80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Source.cpp
-  Generating Code...
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(81,28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\hashTablePlus.cpp(86,28): warning C4101: 'e': unreferenced local variable
   DS project.vcxproj -> C:\Users\sabar\OneDrive\Documents\GitHub\Pizzeria\x64\Debug\DS project.exe

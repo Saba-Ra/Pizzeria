@@ -27,7 +27,7 @@ void printAll(hashTable&, string);
 bool is_valid_command(string);
 
 void print_menu() {
-	int currentLevel = 0;
+	int currentLevel = 1;
 	KDtree tree;
 	hashTable table;
 	hashTablePlus commandsTable;

@@ -2,7 +2,7 @@
 #include "neighborHood.h"
 #include"KDtree.h"
 #include <sstream>
-hashTablePlus::hashTablePlus() :size(97) {}
+hashTablePlus::hashTablePlus() :size(97), table(97){}
 
 void hashTablePlus::insert(const chainNode& newNode) {
 	size_t index = multiplicationHash(newNode.get_key());
@@ -37,7 +37,7 @@ chainNode* hashTablePlus::search(int key) {
 
 void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regions, hashTable& table, KDtree& tree, hashTablePlus& commandsTable, list<pair<string, int>>& mostBranch) {
 	if (current_level != 0 && num_levels <= current_level) {
-		for (int i = current_level; i > num_levels; i--) {
+		for (int i = current_level; i >= num_levels; i--) {
 			try {
 				chainNode* temp = search(i);
 				stringstream cmd_ss(temp->get_value());
@@ -62,9 +62,10 @@ void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regio
 						auto it = std::find_if(all_nodes.begin(), all_nodes.end(), [&](treeNode* node) {
 							return node->get_point() == tmp;
 							});
+						auto temp = it;
 						all_nodes.erase(it);
 						tree.buildTree(all_nodes);
-						table.Delete((*it)->get_name());
+						//table.Delete((*temp)->get_name());
 					}
 					else if (action == "Add-Br") {
 						tree.Delete(tmp, table, mostBranch, commandsTable, i, true, false);
@@ -80,7 +81,7 @@ void hashTablePlus::Undo(int num_levels, int& current_level, neighborHood& regio
 					tmp.set_get_xy()[1] = y;
 					tree.insert(mainName, name, tmp, table, commandsTable, i, false);
 				}
-				Delete(*temp);
+				this->Delete(*temp);
 			}
 			catch (const exception& e) {}
 		}
